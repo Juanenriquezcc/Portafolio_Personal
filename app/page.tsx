@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Navbar from "../components/Navbar";
-import Projects from "../components/Projects";
+import Projects from "../components/ProjectsBook";
 import Services from "../components/Services";
 import Testimonials from "../components/Testimonials";
 
