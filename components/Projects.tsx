@@ -51,7 +51,7 @@ export default function Projects() {
   );
 
   return (
-    <section id="projects" className="space-y-8">
+    <section id="projects" className="scroll-mt-28 space-y-8 md:scroll-mt-32">
       <div className="text-center">
         <p className="text-sm text-[#8ef0df]">Portafolio en crecimiento</p>
         <h3 className="text-3xl font-bold text-slate-100">Mis Proyectos</h3>
@@ -70,13 +70,13 @@ export default function Projects() {
               key={`${project.title}-${index}`}
               className={`overflow-hidden rounded-2xl transition-all duration-700 ease-out ${
                 isCenter
-                  ? "frosted-panel project-breath w-96 scale-100 border-[#2ee3c3]/35"
+                  ? "frosted-panel project-breath w-84 scale-100 border-[#2ee3c3]/35"
                   : distance === 1
-                    ? "frosted-panel w-80 scale-95 opacity-84"
-                    : "frosted-panel w-72 scale-93 opacity-70"
+                    ? "frosted-panel w-72 scale-95 opacity-84"
+                    : "frosted-panel w-64 scale-93 opacity-70"
               }`}
             >
-              <div className="aspect-[16/10] overflow-hidden">
+              <div className="aspect-16/10 overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}

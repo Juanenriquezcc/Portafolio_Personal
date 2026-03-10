@@ -19,7 +19,7 @@ const skills = [
 
 export default function Testimonials() {
   return (
-    <section id="sobre-mi" className="grid grid-cols-1 gap-8 md:grid-cols-2">
+    <section id="sobre-mi" className="scroll-mt-28 grid grid-cols-1 gap-8 md:scroll-mt-32 md:grid-cols-2">
       <article className="frosted-panel rounded-3xl p-7">
         <p className="text-sm text-[#8ef0df]">Fortalezas</p>
         <h3 className="text-3xl font-bold text-slate-100">Mis Skills</h3>

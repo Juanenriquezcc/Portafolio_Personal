@@ -1,3 +1,5 @@
+import { Facebook, Github, Instagram, Linkedin } from "lucide-react";
+
 export default function Footer() {
   return (
     <footer id="resume" className="rounded-3xl border border-[#2ee3c3]/20 bg-[#182334]/80 p-8 backdrop-blur">
@@ -29,9 +31,10 @@ export default function Footer() {
         <div className="order-2 flex basis-full flex-col gap-3 sm:order-3">
           <p className="text-sm font-semibold text-slate-100">Redes</p>
           <div className="grid grid-flow-col auto-cols-max gap-3">
-            <a href="#" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#1a2a3b] text-xs text-[#8ef0df]">GH</a>
-            <a href="#" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#1a2a3b] text-xs text-[#8ef0df]">In</a>
-            <a href="#" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#1a2a3b] text-xs text-[#8ef0df]">Ig</a>
+            <a href="#" aria-label="GitHub" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#1a2a3b] text-[#8ef0df]"><Github size={16} /></a>
+            <a href="#" aria-label="LinkedIn" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#1a2a3b] text-[#8ef0df]"><Linkedin size={16} /></a>
+            <a href="#" aria-label="Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#1a2a3b] text-[#8ef0df]"><Instagram size={16} /></a>
+            <a href="#" aria-label="Facebook" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#1a2a3b] text-[#8ef0df]"><Facebook size={16} /></a>
           </div>
         </div>
       </div>

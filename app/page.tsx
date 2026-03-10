@@ -15,6 +15,19 @@ const bgIcons = [
   { label: "UX", top: "70%", left: "86%", size: "text-2xl", driftX: 20, driftY: 15 },
   { label: "JS", top: "82%", left: "28%", size: "text-3xl", driftX: 16, driftY: 11 },
   { label: "TS", top: "38%", left: "60%", size: "text-2xl", driftX: 14, driftY: 12 },
+  { label: "()", top: "10%", left: "24%", size: "text-2xl", driftX: 18, driftY: 12 },
+  { label: "[]", top: "16%", left: "44%", size: "text-2xl", driftX: 15, driftY: 11 },
+  { label: "API", top: "20%", left: "66%", size: "text-xl", driftX: 18, driftY: 13 },
+  { label: "WEB", top: "30%", left: "18%", size: "text-xl", driftX: 17, driftY: 12 },
+  { label: "SQL", top: "34%", left: "34%", size: "text-2xl", driftX: 14, driftY: 10 },
+  { label: "DEV", top: "42%", left: "78%", size: "text-xl", driftX: 19, driftY: 14 },
+  { label: "<>", top: "48%", left: "50%", size: "text-3xl", driftX: 12, driftY: 9 },
+  { label: "#", top: "62%", left: "26%", size: "text-2xl", driftX: 16, driftY: 12 },
+  { label: "%", top: "66%", left: "56%", size: "text-2xl", driftX: 14, driftY: 10 },
+  { label: "*", top: "74%", left: "70%", size: "text-3xl", driftX: 20, driftY: 15 },
+  { label: "NODE", top: "80%", left: "10%", size: "text-xl", driftX: 15, driftY: 11 },
+  { label: "NEXT", top: "88%", left: "48%", size: "text-xl", driftX: 16, driftY: 10 },
+  { label: "REACT", top: "90%", left: "76%", size: "text-xl", driftX: 15, driftY: 10 },
 ];
 
 export default function Home() {
@@ -46,12 +59,13 @@ export default function Home() {
       {bgIcons.map((icon, index) => (
         <span
           key={`${icon.label}-${icon.top}`}
-          className={`bg-icon-float pointer-events-none absolute ${icon.size} select-none font-bold text-[#7ff3e1]/20`}
+          className={`bg-icon-water pointer-events-none absolute ${icon.size} select-none font-bold text-[#7ff3e1]/20`}
           style={{
             top: icon.top,
             left: icon.left,
             transform: `translate(${iconOffsets[index]?.x ?? 0}px, ${iconOffsets[index]?.y ?? 0}px)`,
             animationDelay: `${index * 0.35}s`,
+            animationDuration: `${5 + (index % 6)}s`,
           }}
         >
           {icon.label}

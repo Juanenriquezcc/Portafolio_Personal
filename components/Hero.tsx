@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Facebook, Github, Instagram, Linkedin } from "lucide-react";
 
 const roles = [
   "Ingeniero de Software",
@@ -22,7 +23,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="grid grid-cols-1 justify-items-center gap-7 px-2 py-6 text-center md:py-8"
+      className="scroll-mt-28 grid grid-cols-1 justify-items-center gap-7 px-2 py-6 text-center md:scroll-mt-32 md:py-8"
     >
       <p className="text-lg text-slate-300">
         Hola, <span className="text-[#4df2d8]">Soy</span>
@@ -54,10 +55,10 @@ export default function Hero() {
 
       <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-slate-300">
         <span className="mr-2 text-sm text-slate-400">Tambien en</span>
-        <a href="#" aria-label="GitHub" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-xs font-semibold text-[#8ef0df] hover:border-[#22e2c2]">GH</a>
-        <a href="#" aria-label="LinkedIn" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-xs font-semibold text-[#8ef0df] hover:border-[#22e2c2]">In</a>
-        <a href="#" aria-label="Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-xs font-semibold text-[#8ef0df] hover:border-[#22e2c2]">Ig</a>
-        <a href="#" aria-label="Facebook" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-xs font-semibold text-[#8ef0df] hover:border-[#22e2c2]">Fb</a>
+        <a href="#" aria-label="GitHub" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"><Github size={16} /></a>
+        <a href="#" aria-label="LinkedIn" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"><Linkedin size={16} /></a>
+        <a href="#" aria-label="Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"><Instagram size={16} /></a>
+        <a href="#" aria-label="Facebook" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"><Facebook size={16} /></a>
       </div>
     </section>
   );

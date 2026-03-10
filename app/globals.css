@@ -104,6 +104,33 @@ html {
   }
 }
 
+@keyframes waterVertical {
+  0% {
+    margin-top: 0;
+    opacity: 0.25;
+  }
+  50% {
+    margin-top: -12px;
+    opacity: 0.45;
+  }
+  100% {
+    margin-top: 0;
+    opacity: 0.25;
+  }
+}
+
+@keyframes waterHorizontal {
+  0% {
+    margin-left: 0;
+  }
+  50% {
+    margin-left: 8px;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
 .role-fade {
   animation: roleFade 4.2s ease-in-out infinite;
 }
@@ -134,4 +161,8 @@ html {
 
 .bg-icon-float {
   animation: floatGentle 5.5s ease-in-out infinite;
+}
+
+.bg-icon-water {
+  animation: waterVertical 6.5s ease-in-out infinite, waterHorizontal 10s ease-in-out infinite;
 }
