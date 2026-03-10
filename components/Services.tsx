@@ -25,8 +25,8 @@ export default function Services() {
   return (
     <section id="services" className="space-y-8">
       <div className="text-center">
-        <p className="text-sm text-emerald-700">Perfil tecnico</p>
-        <h3 className="text-3xl font-bold text-emerald-950">Lenguajes Manejados</h3>
+        <p className="text-sm text-[#8ef0df]">Perfil tecnico</p>
+        <h3 className="text-3xl font-bold text-slate-100">Lenguajes Manejados</h3>
       </div>
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -35,11 +35,11 @@ export default function Services() {
             key={service.title}
             className="frosted-panel flex flex-col items-center gap-5 rounded-2xl p-6 text-center transition-transform duration-500 hover:-translate-y-2"
           >
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-400/15 text-sm font-semibold text-emerald-300">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#22e2c2]/15 text-sm font-semibold text-[#8ef0df]">
               {service.icon}
             </span>
-            <h4 className="text-xl font-semibold text-emerald-950">{service.title}</h4>
-            <p className="text-sm leading-7 text-emerald-950/75">{service.text}</p>
+            <h4 className="text-xl font-semibold text-slate-100">{service.title}</h4>
+            <p className="text-sm leading-7 text-slate-300">{service.text}</p>
           </article>
         ))}
       </div>

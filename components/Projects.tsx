@@ -43,40 +43,40 @@ export default function Projects() {
   }, []);
 
   const visibleCards = useMemo(
-    () => [
-      projects[(active - 1 + projects.length) % projects.length],
-      projects[active],
-      projects[(active + 1) % projects.length],
-    ],
+    () =>
+      [-2, -1, 0, 1, 2].map(
+        (offset) => projects[(active + offset + projects.length) % projects.length],
+      ),
     [active],
   );
 
   return (
     <section id="projects" className="space-y-8">
       <div className="text-center">
-        <p className="text-sm text-emerald-700">Portafolio en crecimiento</p>
-        <h3 className="text-3xl font-bold text-emerald-950">Mis Proyectos</h3>
-        <p className="mx-auto mt-3 max-w-2xl text-sm text-emerald-950/75">
+        <p className="text-sm text-[#8ef0df]">Portafolio en crecimiento</p>
+        <h3 className="text-3xl font-bold text-slate-100">Mis Proyectos</h3>
+        <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-300">
           He avanzado en cada proyecto de forma constante, mejorando codigo,
           estructura y resultados de manera progresiva.
         </p>
       </div>
 
-      <div className="hidden grid-cols-12 items-center gap-4 md:grid md:grid-rows-1">
+      <div className="hidden items-end justify-center gap-3 md:flex">
         {visibleCards.map((project, index) => {
-          const isCenter = index === 1;
+          const distance = Math.abs(index - 2);
+          const isCenter = index === 2;
           return (
             <article
               key={`${project.title}-${index}`}
-              className={`row-span-1 overflow-hidden rounded-2xl transition-all duration-700 ease-out ${
+              className={`overflow-hidden rounded-2xl transition-all duration-700 ease-out ${
                 isCenter
-                  ? "frosted-panel project-breath col-span-6 col-start-4 col-end-10 scale-100 border-emerald-400/30"
-                  : index === 0
-                    ? "frosted-panel col-span-3 col-start-1 col-end-4 scale-90 opacity-70"
-                    : "frosted-panel col-span-3 col-start-10 col-end-13 scale-90 opacity-70"
+                  ? "frosted-panel project-breath w-96 scale-100 border-[#2ee3c3]/35"
+                  : distance === 1
+                    ? "frosted-panel w-80 scale-95 opacity-84"
+                    : "frosted-panel w-72 scale-93 opacity-70"
               }`}
             >
-              <div className="h-44 overflow-hidden">
+              <div className="aspect-[16/10] overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -85,10 +85,12 @@ export default function Projects() {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="flex flex-col gap-2 p-5">
-                <h4 className="text-lg font-semibold text-emerald-950">{project.title}</h4>
-                <p className="text-sm text-emerald-950/75">{project.text}</p>
-              </div>
+              {isCenter ? (
+                <div className="flex flex-col gap-2 p-5">
+                  <h4 className="text-lg font-semibold text-slate-100">{project.title}</h4>
+                  <p className="text-sm text-slate-300">{project.text}</p>
+                </div>
+              ) : null}
             </article>
           );
         })}
@@ -108,8 +110,8 @@ export default function Projects() {
               className="h-44 w-full object-cover"
             />
             <div className="p-5">
-              <h4 className="text-lg font-semibold text-emerald-950">{project.title}</h4>
-              <p className="mt-2 text-sm text-emerald-950/75">{project.text}</p>
+              <h4 className="text-lg font-semibold text-slate-100">{project.title}</h4>
+              <p className="mt-2 text-sm text-slate-300">{project.text}</p>
             </div>
           </article>
         ))}
