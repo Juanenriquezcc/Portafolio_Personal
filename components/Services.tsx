@@ -23,7 +23,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="space-y-8">
+    <section id="services" className="scroll-mt-28 space-y-8 md:scroll-mt-32">
       <div className="text-center">
         <p className="text-sm text-[#8ef0df]">Perfil tecnico</p>
         <h3 className="text-3xl font-bold text-slate-100">Lenguajes Manejados</h3>

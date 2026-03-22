@@ -191,6 +191,7 @@ html {
 .book-shell {
   position: relative;
   overflow: hidden;
+  perspective: 1600px;
   border: 1px solid rgba(46, 227, 195, 0.24);
   border-radius: 1.25rem;
   background: linear-gradient(145deg, rgba(18, 33, 50, 0.9), rgba(16, 29, 44, 0.86));
@@ -211,9 +212,17 @@ html {
 .book-page-left {
   background: linear-gradient(145deg, rgba(19, 34, 51, 0.94), rgba(16, 30, 47, 0.9));
   animation: pageTurn 580ms ease-out;
+  transform: rotateY(0.8deg);
 }
 
 .book-page-right {
   background: linear-gradient(145deg, rgba(20, 36, 55, 0.92), rgba(18, 32, 49, 0.9));
   animation: pageTurn 620ms ease-out;
+  transform: rotateY(-0.8deg);
+}
+
+.book-page-mobile {
+  animation: pageTurn 620ms ease-out;
+  transform-origin: center;
+  box-shadow: 0 16px 42px -30px rgba(34, 226, 194, 0.45);
 }

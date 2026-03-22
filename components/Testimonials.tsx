@@ -1,74 +1,51 @@
-const skills = [
+import { Quote } from "lucide-react";
+
+const testimonials = [
   {
-    title: "Diseno de Interfaces",
-    text: "Construyo vistas limpias, enfocadas en claridad visual y facilidad de uso.",
+    name: "Camila Rojas",
+    role: "Mentora de Proyecto",
+    message:
+      "Juan Jose demuestra compromiso real con la calidad del codigo y una gran capacidad para resolver problemas tecnicos bajo presion.",
   },
   {
-    title: "Desarrollo Web",
-    text: "Implemento aplicaciones con React y Next.js con componentes reutilizables.",
+    name: "Andres Munoz",
+    role: "Companero de Desarrollo",
+    message:
+      "Trabajar con el es facil por su comunicacion clara. Siempre propone mejoras utiles y cuida los detalles de interfaz y funcionalidad.",
   },
   {
-    title: "Resolucion de Problemas",
-    text: "Analizo requerimientos y convierto ideas en soluciones funcionales.",
-  },
-  {
-    title: "Trabajo en Equipo",
-    text: "Me adapto a roles colaborativos y organizo tareas con buena comunicacion.",
+    name: "Laura Benavides",
+    role: "Cliente Academica",
+    message:
+      "Entrego una solucion funcional, ordenada y con excelente presentacion. Se nota la dedicacion y su enfoque profesional.",
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section id="sobre-mi" className="scroll-mt-28 grid grid-cols-1 gap-8 md:scroll-mt-32 md:grid-cols-2">
-      <article className="frosted-panel rounded-3xl p-7">
-        <p className="text-sm text-[#8ef0df]">Fortalezas</p>
-        <h3 className="text-3xl font-bold text-slate-100">Mis Skills</h3>
-
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {skills.map((skill) => (
-            <div
-              key={skill.title}
-              className="frosted-panel flex flex-col gap-2 rounded-xl p-4"
-            >
-              <h4 className="text-base font-semibold text-slate-100">{skill.title}</h4>
-              <p className="text-sm text-slate-300">{skill.text}</p>
-            </div>
-          ))}
-        </div>
-      </article>
-
-      <article className="frosted-panel rounded-3xl p-7">
-        <p className="text-sm text-[#8ef0df]">Contacto directo</p>
-        <h3 className="text-3xl font-bold text-slate-100">Como puedo ayudarte</h3>
-        <p className="mt-3 text-sm text-slate-300">
-          En base a tu necesidad, puedo apoyar en diseno de interfaces,
-          desarrollo web y mejoras de experiencia de usuario.
+    <section id="sobre-mi" className="scroll-mt-28 space-y-8 md:scroll-mt-32">
+      <div className="text-center">
+        <p className="text-sm text-[#8ef0df]">Como puedo ayudarte</p>
+        <h3 className="text-3xl font-bold text-slate-100">Testimonios</h3>
+        <p className="mx-auto mt-3 max-w-3xl text-sm text-slate-300">
+          Estas opiniones reflejan la forma en la que trabajo: enfoque en
+          resultados, comunicacion efectiva y soluciones utiles para cada
+          necesidad.
         </p>
+      </div>
 
-        <form className="mt-6 flex flex-col gap-4">
-          <input
-            type="text"
-            placeholder="Tu nombre"
-            className="rounded-xl border border-[#2ee3c3]/30 bg-[#1a2a3b] px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400 focus:border-[#22e2c2] focus:outline-none"
-          />
-          <input
-            type="email"
-            placeholder="Tu correo"
-            className="rounded-xl border border-[#2ee3c3]/30 bg-[#1a2a3b] px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400 focus:border-[#22e2c2] focus:outline-none"
-          />
-          <textarea
-            placeholder="Deja aqui tu comentario"
-            rows={4}
-            className="resize-none rounded-xl border border-[#2ee3c3]/30 bg-[#1a2a3b] px-4 py-3 text-sm text-slate-100 placeholder:text-slate-400 focus:border-[#22e2c2] focus:outline-none"
-          />
-          <button
-            type="submit"
-            className="rounded-xl bg-[#22e2c2] px-5 py-3 text-sm font-semibold text-slate-900 transition-colors hover:bg-[#59ecd4]"
-          >
-            Enviar comentario
-          </button>
-        </form>
-      </article>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {testimonials.map((item) => (
+          <article key={item.name} className="frosted-panel rounded-2xl p-6 transition-transform duration-500 hover:-translate-y-2">
+            <Quote className="text-[#8ef0df]" size={22} />
+            <p className="mt-4 text-sm leading-7 text-slate-300">{item.message}</p>
+            <div className="mt-5 border-t border-[#2ee3c3]/20 pt-4">
+              <p className="font-semibold text-slate-100">{item.name}</p>
+              <p className="text-xs text-slate-400">{item.role}</p>
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

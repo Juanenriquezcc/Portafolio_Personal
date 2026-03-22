@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Facebook, Github, Instagram, Linkedin } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 
 const roles = [
   "Ingeniero de Software",
@@ -31,34 +31,55 @@ export default function Hero() {
 
       <div className="space-y-2">
         <h1 className="bg-linear-to-r from-white via-[#9efaf0] to-[#22e2c2] bg-clip-text text-4xl font-extrabold leading-tight text-transparent drop-shadow-[0_0_18px_rgba(34,226,194,0.35)] md:text-5xl">
-          Nombre
+          Juan Jose Enriquez Cordoba
         </h1>
         <h2 className="role-sequence h-8 text-xl font-semibold text-[#b7fbf1] md:text-2xl">
           {roles[roleIndex]}
         </h2>
+        <p className="mx-auto mt-3 max-w-3xl text-sm leading-8 text-slate-200 md:text-base">
+          Estudiante de Ingenieria de Software en la Universidad Cooperativa de
+          Colombia. Me especializo en crear soluciones web funcionales,
+          escalables y visualmente profesionales, integrando buenas practicas
+          de desarrollo, experiencia de usuario y despliegue continuo.
+        </p>
       </div>
-
-      <p className="max-w-3xl text-sm leading-8 text-slate-200 md:text-base">
-        Descripcion: aqui puedes colocar un resumen profesional corto sobre tu
-        perfil, experiencia, estudios, intereses y el valor que aportas en
-        cada proyecto.
-      </p>
 
       <div className="flex flex-row flex-wrap items-center justify-center gap-4">
         <a
           href="tel:+573157614544"
           className="rounded-full border border-[#43ecd2]/45 bg-[#1a2a3d] px-6 py-3 text-sm font-semibold text-slate-100 shadow-[0_0_22px_rgba(34,226,194,0.22)] transition-transform duration-500 hover:-translate-y-1"
         >
-          Contacto: <span className="text-base text-[#4df2d8]">+57 XXX XXX XXXX</span>
+          Contacto: <span className="text-base text-[#4df2d8]">+57 315 7614 544</span>
+        </a>
+        <a
+          href="/cv-juan-jose-enriquez.pdf"
+          download="HOJA_DE_VIDA_JUAN_JOSE_ENRIQUEZ.pdf"
+          className="rounded-full border border-[#2ee3c3]/35 bg-[#17273a] px-6 py-3 text-sm font-semibold text-slate-100 transition-colors hover:bg-[#20344b]"
+        >
+          Ver CV / Perfil
         </a>
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-slate-300">
-        <span className="mr-2 text-sm text-slate-400">Tambien en</span>
-        <a href="#" aria-label="GitHub" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"><Github size={16} /></a>
-        <a href="#" aria-label="LinkedIn" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"><Linkedin size={16} /></a>
-        <a href="#" aria-label="Instagram" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"><Instagram size={16} /></a>
-        <a href="#" aria-label="Facebook" className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"><Facebook size={16} /></a>
+        <span className="mr-2 text-sm text-slate-400">Links principales</span>
+        <a
+          href="https://github.com/Juanenriquezcc"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"
+        >
+          <Github size={16} />
+        </a>
+        <a
+          href="https://vercel.com/juanenriquezccs-projects"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Vercel"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"
+        >
+          <ExternalLink size={16} />
+        </a>
       </div>
     </section>
   );

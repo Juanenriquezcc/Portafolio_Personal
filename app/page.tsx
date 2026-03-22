@@ -1,12 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import ContactSection from "@/components/ContactSection";
+import Experience from "@/components/Experience";
 import Footer from "../components/Footer";
-import Hero from "../components/Hero";
-import Navbar from "../components/Navbar";
-import Projects from "../components/ProjectsBook";
-import Services from "../components/Services";
-import Testimonials from "../components/Testimonials";
+import Hero from "@/components/Hero";
+import Navbar from "@/components/Navbar";
+import Projects from "@/components/ProjectsBook";
+import Services from "@/components/Services";
+import Testimonials from "@/components/Testimonials";
 
 const bgIcons = [
   { label: "</>", top: "14%", left: "8%", size: "text-3xl", driftX: 22, driftY: 16 },
@@ -50,6 +52,13 @@ export default function Home() {
         const y = event.clientY / window.innerHeight;
         setMouse({ x, y });
       }}
+      onTouchMove={(event) => {
+        const touch = event.touches[0];
+        if (!touch) return;
+        const x = touch.clientX / window.innerWidth;
+        const y = touch.clientY / window.innerHeight;
+        setMouse({ x, y });
+      }}
     >
       <div className="pointer-events-none absolute inset-0 opacity-22" style={{ backgroundImage: "radial-gradient(rgba(46,227,195,0.14) 0.5px, transparent 0.5px)", backgroundSize: "3px 3px" }} />
       <div className="pointer-events-none absolute -left-20 top-16 h-72 w-72 rounded-full bg-cyan-300/25 blur-[100px]" />
@@ -82,6 +91,10 @@ export default function Home() {
         <Projects />
         <div className="section-divider" />
         <Testimonials />
+        <div className="section-divider" />
+        <Experience />
+        <div className="section-divider" />
+        <ContactSection />
         <div className="section-divider" />
         <Footer />
       </main>

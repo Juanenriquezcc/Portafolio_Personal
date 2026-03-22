@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 const navItems = [
   { label: "INICIO", href: "#home" },
   { label: "PROYECTOS", href: "#projects" },
-  { label: "SOBRE MI", href: "#sobre-mi" },
+  { label: "EXPERIENCIA", href: "#experiencia" },
+  { label: "CONTACTO", href: "#contacto" },
 ];
 
 export default function Navbar() {
@@ -46,23 +47,25 @@ export default function Navbar() {
           <span className="text-base font-semibold tracking-wide sm:text-lg">Portafolio</span>
         </a>
 
-        <nav className="flex flex-row flex-nowrap items-center gap-4 text-[11px] text-slate-300 sm:gap-5 sm:text-xs md:gap-8 md:text-sm">
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className={`group relative transition-colors duration-300 hover:text-[#22e2c2] ${
-                active === item.href ? "text-[#22e2c2]" : ""
-              }`}
-            >
-              {item.label}
-              <span
-                className={`absolute -bottom-2 left-0 h-0.5 w-full origin-left scale-x-0 bg-[#22e2c2] transition-transform duration-500 group-hover:scale-x-100 ${
-                  active === item.href ? "scale-x-100" : ""
+        <nav className="text-[10px] text-slate-300 sm:text-[11px] md:text-sm">
+          <div className="flex flex-row flex-wrap items-center justify-end gap-x-3 gap-y-1 sm:gap-x-4 md:gap-x-6">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className={`group relative transition-colors duration-300 hover:text-[#22e2c2] ${
+                  active === item.href ? "text-[#22e2c2]" : ""
                 }`}
-              />
-            </a>
-          ))}
+              >
+                {item.label}
+                <span
+                  className={`absolute -bottom-2 left-0 h-0.5 w-full origin-left scale-x-0 bg-[#22e2c2] transition-transform duration-500 group-hover:scale-x-100 ${
+                    active === item.href ? "scale-x-100" : ""
+                  }`}
+                />
+              </a>
+            ))}
+          </div>
         </nav>
 
         <p className="hidden basis-64 text-right text-sm text-[#9deee0] lg:block">
