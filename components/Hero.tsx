@@ -11,13 +11,28 @@ const roles = [
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
+  const [roleVisible, setRoleVisible] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 4200);
+    const cycleMs = 2400;
+    const fadeMs = 220;
+    let fadeTimeout: ReturnType<typeof setTimeout> | null = null;
 
-    return () => clearInterval(interval);
+    const interval = setInterval(() => {
+      setRoleVisible(false);
+
+      fadeTimeout = setTimeout(() => {
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+        setRoleVisible(true);
+      }, fadeMs);
+    }, cycleMs);
+
+    return () => {
+      clearInterval(interval);
+      if (fadeTimeout) {
+        clearTimeout(fadeTimeout);
+      }
+    };
   }, []);
 
   return (
@@ -33,7 +48,11 @@ export default function Hero() {
         <h1 className="bg-linear-to-r from-white via-[#9efaf0] to-[#22e2c2] bg-clip-text text-4xl font-extrabold leading-tight text-transparent drop-shadow-[0_0_18px_rgba(34,226,194,0.35)] md:text-5xl">
           Juan Jose Enriquez Cordoba
         </h1>
-        <h2 className="role-sequence h-8 text-xl font-semibold text-[#b7fbf1] md:text-2xl">
+        <h2
+          className={`h-8 text-xl font-semibold text-[#b7fbf1] transition-all duration-200 md:text-2xl ${
+            roleVisible ? "translate-y-0 opacity-100 blur-0" : "-translate-y-1 opacity-0 blur-[1px]"
+          }`}
+        >
           {roles[roleIndex]}
         </h2>
         <p className="mx-auto mt-3 max-w-3xl text-sm leading-8 text-slate-200 md:text-base">
