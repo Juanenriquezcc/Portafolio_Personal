@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 
 type Locale = "es" | "en";
 type ThemeMode = "dark" | "light";
@@ -32,6 +32,7 @@ interface NavbarProps {
 
 export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeChange }: NavbarProps) {
   const [active, setActive] = useState("#home");
+  const [menuOpen, setMenuOpen] = useState(false);
   const currentItems = navItems[locale];
 
   useEffect(() => {
@@ -95,7 +96,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
         </a>
 
         <nav
-          className={`flex items-center justify-center text-[10px] sm:text-[11px] md:text-xs lg:text-sm ${
+          className={`hidden items-center justify-center text-[10px] sm:text-[11px] md:text-xs lg:text-sm xl:flex ${
             themeMode === "dark" ? "text-slate-300" : "text-slate-700"
           }`}
         >
@@ -162,6 +163,51 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           >
             {themeMode === "dark" ? <Sun size={14} /> : <Moon size={14} />}
           </button>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 lg:h-9 lg:w-9 xl:hidden ${
+              themeMode === "dark"
+                ? "border-[#2ee3c3]/35 bg-[#17273a] text-[#8ef0df] hover:border-[#22e2c2]"
+                : "border-cyan-500/35 bg-white text-cyan-700 hover:border-cyan-600"
+            }`}
+            aria-label={menuOpen ? "Cerrar menu" : "Abrir menu"}
+          >
+            {menuOpen ? <X size={14} /> : <Menu size={14} />}
+          </button>
+        </div>
+
+        <div className={`xl:hidden ${menuOpen ? "block" : "hidden"}`}>
+          <nav
+            className={`mt-2 rounded-2xl border p-2 ${
+              themeMode === "dark"
+                ? "border-[#2ee3c3]/20 bg-[#162334]/88"
+                : "border-cyan-600/20 bg-white/95"
+            }`}
+          >
+            <div className="grid grid-cols-2 gap-2 text-[11px] sm:text-xs">
+              {currentItems.map((item) => (
+                <a
+                  key={`mobile-${item.label}`}
+                  href={item.href}
+                  onClick={() => {
+                    setActive(item.href);
+                    setMenuOpen(false);
+                  }}
+                  className={`rounded-xl border px-2 py-2 text-center transition-colors duration-300 ${
+                    active === item.href
+                      ? "border-[#22e2c2] bg-[#22e2c2]/15 text-[#22e2c2]"
+                      : themeMode === "dark"
+                        ? "border-[#2ee3c3]/20 bg-[#17273a]/65 text-slate-200 hover:border-[#22e2c2] hover:text-[#22e2c2]"
+                        : "border-cyan-600/20 bg-cyan-50/65 text-slate-700 hover:border-cyan-600 hover:text-cyan-700"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </nav>
         </div>
       </div>
     </header>
