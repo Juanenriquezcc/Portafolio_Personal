@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type TouchEvent } from "react";
 import Image from "next/image";
 
 type Locale = "es" | "en";
@@ -71,6 +71,7 @@ interface ProjectsBookProps {
 
 export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
   const [active, setActive] = useState(0);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -86,8 +87,42 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
   const currentStack = locale === "es" ? current.stackEs : current.stackEn;
   const currentState = locale === "es" ? current.stateEs : current.stateEn;
 
+  const goNext = () => setActive((prev) => (prev + 1) % projects.length);
+  const goPrev = () => setActive((prev) => (prev - 1 + projects.length) % projects.length);
+
+  const handleTouchStart = (event: TouchEvent<HTMLElement>) => {
+    const touch = event.touches[0];
+    if (!touch) return;
+    setTouchStart({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLElement>) => {
+    if (!touchStart) return;
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+
+    const deltaX = touch.clientX - touchStart.x;
+    const deltaY = touch.clientY - touchStart.y;
+    const horizontalThreshold = 45;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > horizontalThreshold) {
+      if (deltaX < 0) {
+        goNext();
+      } else {
+        goPrev();
+      }
+    }
+
+    setTouchStart(null);
+  };
+
   return (
-    <section id="projects" className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32 lg:space-y-8">
+    <section
+      id="projects"
+      className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32 lg:space-y-8"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="text-center">
         <p className={`text-sm ${themeMode === "dark" ? "text-[#8ef0df]" : "text-cyan-700"}`}>{locale === "es" ? "Portafolio en crecimiento" : "Growing portfolio"}</p>
         <h3 className={`text-2xl font-bold md:text-[1.75rem] lg:text-3xl ${themeMode === "dark" ? "text-slate-100" : "text-slate-800"}`}>{locale === "es" ? "Mis Proyectos" : "My Projects"}</h3>
