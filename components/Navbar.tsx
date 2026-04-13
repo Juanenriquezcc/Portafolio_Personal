@@ -33,30 +33,36 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
   const currentItems = navItems[locale];
 
   useEffect(() => {
-    const sections = currentItems
-      .map((item) => document.querySelector(item.href))
-      .filter(Boolean) as Element[];
+    // Evita que el navegador restaure anclas al recargar y fuerza estado inicial en INICIO.
+    if (window.location.hash && window.location.hash !== "#home") {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    const updateActiveByScroll = () => {
+      const offset = 150;
+      const scrollY = window.scrollY + offset;
+      let current = currentItems[0].href;
 
-        if (visible?.target?.id) {
-          setActive(`#${visible.target.id}`);
+      for (const item of currentItems) {
+        const section = document.querySelector(item.href) as HTMLElement | null;
+        if (!section) continue;
+        if (scrollY >= section.offsetTop) {
+          current = item.href;
         }
-      },
-      {
-        root: null,
-        rootMargin: "-42% 0px -45% 0px",
-        threshold: [0.2, 0.35, 0.55],
-      },
-    );
+      }
 
-    sections.forEach((section) => observer.observe(section));
+      setActive((prev) => (prev === current ? prev : current));
+    };
 
-    return () => observer.disconnect();
+    updateActiveByScroll();
+    window.addEventListener("scroll", updateActiveByScroll, { passive: true });
+    window.addEventListener("resize", updateActiveByScroll);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveByScroll);
+      window.removeEventListener("resize", updateActiveByScroll);
+    };
   }, [currentItems]);
 
   return (
