@@ -122,7 +122,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
         </a>
 
         <nav
-          className={`hidden items-center justify-center text-[10px] sm:text-[11px] md:flex md:text-xs lg:text-sm ${
+          className={`hidden items-center justify-center text-[10px] sm:text-[11px] md:text-xs lg:text-sm xl:flex ${
             themeMode === "dark" ? "text-slate-300" : "text-slate-700"
           }`}
         >
@@ -196,7 +196,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 md:hidden ${
+            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 md:h-9 md:w-9 lg:h-10 lg:w-10 xl:hidden ${
               themeMode === "dark"
                 ? "border-[#2ee3c3]/35 bg-[#17273a] text-[#8ef0df] hover:border-[#22e2c2]"
                 : "border-cyan-500/35 bg-white text-cyan-700 hover:border-cyan-600"
@@ -207,7 +207,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           </button>
 
           <div
-            className={`pointer-events-none absolute right-0 top-[calc(100%+0.55rem)] z-30 w-[min(18rem,calc(100vw-1.5rem))] origin-top-right transition-all duration-300 md:hidden ${
+            className={`pointer-events-none absolute right-0 top-[calc(100%+0.55rem)] z-30 w-[min(18rem,calc(100vw-1.5rem))] origin-top-right transition-all duration-300 xl:hidden ${
               menuOpen ? "pointer-events-auto translate-y-0 scale-100 opacity-100" : "-translate-y-1 scale-95 opacity-0"
             }`}
           >
