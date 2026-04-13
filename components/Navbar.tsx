@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 
 type Locale = "es" | "en";
@@ -31,6 +31,33 @@ interface NavbarProps {
 export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeChange }: NavbarProps) {
   const [active, setActive] = useState("#home");
   const currentItems = navItems[locale];
+
+  useEffect(() => {
+    const sections = currentItems
+      .map((item) => document.querySelector(item.href))
+      .filter(Boolean) as Element[];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target?.id) {
+          setActive(`#${visible.target.id}`);
+        }
+      },
+      {
+        root: null,
+        rootMargin: "-42% 0px -45% 0px",
+        threshold: [0.2, 0.35, 0.55],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [currentItems]);
 
   return (
     <header
