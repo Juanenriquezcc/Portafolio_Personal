@@ -122,7 +122,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
         </a>
 
         <nav
-          className={`hidden items-center justify-center text-[10px] sm:text-[11px] md:text-xs lg:text-sm xl:flex ${
+          className={`hidden items-center justify-center text-[10px] sm:text-[11px] md:flex md:text-xs lg:text-sm ${
             themeMode === "dark" ? "text-slate-300" : "text-slate-700"
           }`}
         >
@@ -196,7 +196,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 md:h-9 md:w-9 lg:h-10 lg:w-10 xl:hidden ${
+            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 md:hidden ${
               themeMode === "dark"
                 ? "border-[#2ee3c3]/35 bg-[#17273a] text-[#8ef0df] hover:border-[#22e2c2]"
                 : "border-cyan-500/35 bg-white text-cyan-700 hover:border-cyan-600"
@@ -207,29 +207,27 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           </button>
 
           <div
-            className={`pointer-events-none absolute right-0 top-[calc(100%+0.55rem)] z-30 w-[min(19rem,calc(100vw-1.5rem))] origin-top-right transition-all duration-300 xl:hidden ${
+            className={`pointer-events-none absolute right-0 top-[calc(100%+0.55rem)] z-30 w-[min(18rem,calc(100vw-1.5rem))] origin-top-right transition-all duration-300 md:hidden ${
               menuOpen ? "pointer-events-auto translate-y-0 scale-100 opacity-100" : "-translate-y-1 scale-95 opacity-0"
             }`}
           >
             <nav
-              className={`rounded-2xl border p-3 shadow-[0_14px_40px_-20px_rgba(15,23,42,0.6)] ${
+              className={`rounded-2xl p-3 shadow-[0_14px_40px_-20px_rgba(15,23,42,0.6)] ${
                 themeMode === "dark"
-                  ? "border-[#2ee3c3]/20 bg-[#162334]/92"
-                  : "border-cyan-600/20 bg-white/96"
+                  ? "bg-[#162334]/88"
+                  : "bg-white/92"
               }`}
             >
-              <ul className="flex flex-col text-[12px] sm:text-[13px]">
+              <ul className="flex flex-col gap-1 text-[13px]">
                 {currentItems.map((item) => (
                   <li
                     key={`mobile-${item.label}`}
-                    className={`border-b ${
-                      themeMode === "dark" ? "border-[#2ee3c3]/15" : "border-cyan-600/15"
-                    } ${menuOpen ? "menu-item-in" : ""} last:border-b-0`}
+                    className={`${menuOpen ? "menu-item-in" : ""}`}
                   >
                     <button
                       type="button"
                       onClick={() => goToSection(item.href)}
-                      className={`block py-2.5 transition-all duration-200 active:scale-[0.99] ${
+                      className={`block py-2 transition-all duration-200 active:scale-[0.99] ${
                         active === item.href
                           ? "text-[#22e2c2] drop-shadow-[0_0_10px_rgba(34,226,194,0.35)]"
                           : themeMode === "dark"
