@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ExternalLink, Github } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
 type Locale = "es" | "en";
 
@@ -118,13 +118,13 @@ export default function Hero({ locale }: HeroProps) {
           <Github size={16} />
         </a>
         <a
-          href="https://vercel.com/juanenriquezccs-projects"
+          href="https://www.linkedin.com/in/juan-enriquez-9405202b4/"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Vercel"
+          aria-label="LinkedIn"
           className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"
         >
-          <ExternalLink size={16} />
+          <Linkedin size={16} />
         </a>
       </div>
     </section>

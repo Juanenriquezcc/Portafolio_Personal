@@ -36,7 +36,7 @@ export default function Services({ locale }: ServicesProps) {
     <section id="services" className="scroll-mt-28 space-y-8 md:scroll-mt-32">
       <div className="text-center">
         <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Perfil tecnico" : "Technical profile"}</p>
-        <h3 className="text-3xl font-bold text-slate-100">{locale === "es" ? "Lenguajes Manejados" : "Languages I work with"}</h3>
+        <h3 className="text-3xl font-bold text-slate-100">{locale === "es" ? "Mi Stack Tecnologico en Lenguajes" : "My Technology Stack in Languages"}</h3>
       </div>
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">

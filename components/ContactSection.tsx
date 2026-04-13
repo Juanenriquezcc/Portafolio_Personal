@@ -1,4 +1,4 @@
-import { ExternalLink, Github } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
 type Locale = "es" | "en";
 
@@ -8,14 +8,14 @@ const copy = {
     title: "Conectemos",
     phone: "Telefono",
     github: "Ver perfil y repositorios",
-    vercel: "Ver despliegues",
+    linkedin: "Ver perfil profesional",
   },
   en: {
     tag: "Contact",
     title: "Let's connect",
     phone: "Phone",
     github: "View profile and repositories",
-    vercel: "View deployments",
+    linkedin: "View professional profile",
   },
 };
 
@@ -53,15 +53,15 @@ export default function ContactSection({ locale }: ContactSectionProps) {
         </article>
 
         <article className="rounded-2xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-5">
-          <p className="text-xs uppercase tracking-[0.12em] text-[#8ef0df]">Vercel</p>
+          <p className="text-xs uppercase tracking-[0.12em] text-[#8ef0df]">LinkedIn</p>
           <a
-            href="https://vercel.com/juanenriquezccs-projects"
+            href="https://www.linkedin.com/in/juan-enriquez-9405202b4/"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 flex items-center gap-2 text-sm text-slate-100 hover:text-[#22e2c2]"
           >
-            <ExternalLink size={16} />
-            {copy[locale].vercel}
+            <Linkedin size={16} />
+            {copy[locale].linkedin}
           </a>
         </article>
       </div>
