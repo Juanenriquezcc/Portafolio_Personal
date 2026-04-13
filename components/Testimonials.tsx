@@ -38,7 +38,7 @@ interface TestimonialsProps {
 
 export default function Testimonials({ locale }: TestimonialsProps) {
   return (
-    <section id="sobre-mi" className="scroll-mt-28 space-y-8 md:scroll-mt-32">
+    <section id="testimonios" className="scroll-mt-28 space-y-8 md:scroll-mt-32">
       <div className="text-center">
         <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Como puedo ayudarte" : "How I can help"}</p>
         <h3 className="text-3xl font-bold text-slate-100">{locale === "es" ? "Testimonios" : "Testimonials"}</h3>

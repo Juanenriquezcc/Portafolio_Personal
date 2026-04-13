@@ -10,12 +10,14 @@ const navItems = {
   es: [
     { label: "INICIO", href: "#home" },
     { label: "PROYECTOS", href: "#projects" },
+    { label: "TESTIMONIOS", href: "#testimonios" },
     { label: "EXPERIENCIA", href: "#experiencia" },
     { label: "CONTACTO", href: "#contacto" },
   ],
   en: [
     { label: "HOME", href: "#home" },
     { label: "PROJECTS", href: "#projects" },
+    { label: "TESTIMONIALS", href: "#testimonios" },
     { label: "EXPERIENCE", href: "#experiencia" },
     { label: "CONTACT", href: "#contacto" },
   ],
@@ -40,14 +42,22 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
     }
 
     const updateActiveByScroll = () => {
-      const offset = 150;
-      const scrollY = window.scrollY + offset;
+      const headerHeight = 96;
+      const probeLine = window.scrollY + headerHeight + window.innerHeight * 0.2;
       let current = currentItems[0].href;
 
       for (const item of currentItems) {
         const section = document.querySelector(item.href) as HTMLElement | null;
         if (!section) continue;
-        if (scrollY >= section.offsetTop) {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (probeLine >= sectionTop && probeLine < sectionBottom) {
+          current = item.href;
+          break;
+        }
+
+        if (probeLine >= sectionTop) {
           current = item.href;
         }
       }
