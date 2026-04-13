@@ -241,3 +241,59 @@ html {
 .menu-item-in {
   animation: menuItemIn 320ms ease-out both;
 }
+
+.theme-light .frosted-panel {
+  background: linear-gradient(145deg, rgba(248, 253, 255, 0.9), rgba(236, 247, 255, 0.88));
+  border-color: rgba(15, 118, 110, 0.22);
+  box-shadow: 0 14px 38px -24px rgba(8, 47, 73, 0.2);
+}
+
+.theme-light .text-slate-100 {
+  color: #0f172a;
+}
+
+.theme-light .text-slate-200 {
+  color: #1e293b;
+}
+
+.theme-light .text-slate-300 {
+  color: #334155;
+}
+
+.theme-light .text-slate-700 {
+  color: #1e293b;
+}
+
+.theme-light .text-slate-800 {
+  color: #0f172a;
+}
+
+.theme-light .text-\[\#8ef0df\] {
+  color: #0f766e;
+}
+
+.theme-light .text-\[\#b8fff4\] {
+  color: #0f766e;
+}
+
+.theme-light .bg-\[\#16263a\]\/70,
+.theme-light .bg-\[\#16263a\]\/75,
+.theme-light .bg-\[\#17273a\]\/70,
+.theme-light .bg-\[\#17273a\]\/75,
+.theme-light .bg-\[\#182738\],
+.theme-light .bg-\[\#1a2a3d\],
+.theme-light .bg-\[\#17273a\] {
+  background-color: rgba(232, 245, 255, 0.9);
+}
+
+.theme-light .border-\[\#2ee3c3\]\/20,
+.theme-light .border-\[\#2ee3c3\]\/25,
+.theme-light .border-\[\#2ee3c3\]\/30,
+.theme-light .border-\[\#2ee3c3\]\/35,
+.theme-light .border-\[\#43ecd2\]\/45 {
+  border-color: rgba(13, 148, 136, 0.34);
+}
+
+.theme-light .section-divider {
+  opacity: 0.9;
+}

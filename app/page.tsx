@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <div
-      className={`relative min-h-screen overflow-x-hidden ${
+      className={`relative min-h-screen overflow-x-hidden ${themeMode === "light" ? "theme-light" : "theme-dark"} ${
         themeMode === "dark"
           ? "bg-[radial-gradient(circle_at_10%_12%,rgba(46,227,195,0.22),transparent_30%),radial-gradient(circle_at_86%_28%,rgba(34,226,194,0.14),transparent_34%),linear-gradient(180deg,#121a28_0%,#171f30_44%,#121a28_100%)]"
           : "bg-[radial-gradient(circle_at_12%_10%,rgba(29,192,178,0.25),transparent_34%),radial-gradient(circle_at_86%_22%,rgba(66,153,225,0.20),transparent_34%),linear-gradient(180deg,#f6fcff_0%,#edf6ff_44%,#eaf5ff_100%)]"
