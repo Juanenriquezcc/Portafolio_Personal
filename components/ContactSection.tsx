@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, Mail, MessageSquare, Send, User } from "lucide-react";
 
 type Locale = "es" | "en";
 
@@ -15,6 +15,7 @@ const copy = {
     linkedin: "Ver perfil profesional",
     formTitle: "Enviame un mensaje",
     formDescription: "Completa tus datos y te abrira tu correo con el mensaje listo para enviar.",
+    formTitleAccent: "Respuesta rapida",
     nameLabel: "Usuario",
     namePlaceholder: "Tu nombre",
     emailLabel: "Correo",
@@ -33,6 +34,7 @@ const copy = {
     linkedin: "View professional profile",
     formTitle: "Send me a message",
     formDescription: "Fill in your details and your email app will open with the message ready to send.",
+    formTitleAccent: "Quick response",
     nameLabel: "User",
     namePlaceholder: "Your name",
     emailLabel: "Email",
@@ -122,50 +124,64 @@ export default function ContactSection({ locale }: ContactSectionProps) {
       </div>
 
       <article className="frosted-panel rounded-2xl p-4 md:rounded-3xl md:p-6 lg:p-7">
-        <div className="text-center">
-          <p className="text-sm text-[#8ef0df]">{copy[locale].formTitle}</p>
-          <p className="mx-auto mt-1 max-w-2xl text-xs text-slate-300 md:text-sm">{copy[locale].formDescription}</p>
+        <div className="text-center md:text-left">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8ef0df]">{copy[locale].formTitleAccent}</p>
+          <h4 className="mt-1 text-xl font-bold text-slate-100 md:text-2xl">{copy[locale].formTitle}</h4>
+          <p className="mx-auto mt-2 max-w-2xl text-xs leading-6 text-slate-300 md:mx-0 md:text-sm md:leading-7">{copy[locale].formDescription}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-4 grid grid-cols-1 gap-3 md:mt-5 md:grid-cols-2 md:gap-4">
+        <form onSubmit={handleSubmit} className="mt-5 grid grid-cols-1 gap-3.5 md:mt-6 md:grid-cols-2 md:gap-4.5">
           <label className="space-y-1.5">
-            <span className="text-xs font-semibold uppercase tracking-[0.11em] text-[#8ef0df]">{copy[locale].nameLabel}</span>
-            <input
-              type="text"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              placeholder={copy[locale].namePlaceholder}
-              className="w-full rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 text-sm text-slate-100 outline-none transition-colors focus:border-[#22e2c2]"
-            />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].nameLabel}</span>
+            <div className="group flex items-center gap-2 rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
+              <User size={15} className="text-[#8ef0df] transition-colors duration-300 group-focus-within:text-[#22e2c2]" />
+              <input
+                type="text"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                placeholder={copy[locale].namePlaceholder}
+                className="w-full bg-transparent text-sm text-slate-100 outline-none placeholder:text-slate-400"
+              />
+            </div>
           </label>
 
           <label className="space-y-1.5">
-            <span className="text-xs font-semibold uppercase tracking-[0.11em] text-[#8ef0df]">{copy[locale].emailLabel}</span>
-            <input
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder={copy[locale].emailPlaceholder}
-              className="w-full rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 text-sm text-slate-100 outline-none transition-colors focus:border-[#22e2c2]"
-            />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].emailLabel}</span>
+            <div className="group flex items-center gap-2 rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
+              <Mail size={15} className="text-[#8ef0df] transition-colors duration-300 group-focus-within:text-[#22e2c2]" />
+              <input
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder={copy[locale].emailPlaceholder}
+                className="w-full bg-transparent text-sm text-slate-100 outline-none placeholder:text-slate-400"
+              />
+            </div>
           </label>
 
           <label className="space-y-1.5 md:col-span-2">
-            <span className="text-xs font-semibold uppercase tracking-[0.11em] text-[#8ef0df]">{copy[locale].messageLabel}</span>
-            <textarea
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
-              placeholder={copy[locale].messagePlaceholder}
-              rows={5}
-              className="w-full resize-y rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 text-sm text-slate-100 outline-none transition-colors focus:border-[#22e2c2]"
-            />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].messageLabel}</span>
+            <div className="group rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
+              <div className="mb-1.5 flex items-center gap-2">
+                <MessageSquare size={15} className="text-[#8ef0df] transition-colors duration-300 group-focus-within:text-[#22e2c2]" />
+                <span className="text-[11px] text-slate-300">{locale === "es" ? "Tu mensaje" : "Your message"}</span>
+              </div>
+              <textarea
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                placeholder={copy[locale].messagePlaceholder}
+                rows={5}
+                className="w-full resize-y bg-transparent text-sm text-slate-100 outline-none placeholder:text-slate-400"
+              />
+            </div>
           </label>
 
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="w-full rounded-xl border border-[#2ee3c3]/35 bg-[#1a2a3d] px-4 py-2.5 text-sm font-semibold text-[#9efaf0] transition-colors hover:bg-[#20344b]"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#2ee3c3]/35 bg-linear-to-r from-[#17304a] via-[#1b3754] to-[#1f3f60] px-4 py-2.5 text-sm font-semibold text-[#9efaf0] transition-transform duration-300 hover:-translate-y-0.5"
             >
+              <Send size={15} />
               {copy[locale].send}
             </button>
             {showRequired && <p className="mt-2 text-center text-xs text-rose-300">{copy[locale].required}</p>}
