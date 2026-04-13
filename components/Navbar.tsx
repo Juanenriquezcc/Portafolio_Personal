@@ -33,13 +33,17 @@ interface NavbarProps {
 export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeChange }: NavbarProps) {
   const [active, setActive] = useState("#home");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [pendingActive, setPendingActive] = useState<string | null>(null);
   const currentItems = navItems[locale];
 
   const goToSection = (href: string) => {
+    setActive(href);
+    setPendingActive(href);
+    window.setTimeout(() => setPendingActive(null), 650);
+
     const section = document.querySelector(href) as HTMLElement | null;
     if (!section) {
       window.history.replaceState(null, "", href);
-      setActive(href);
       setMenuOpen(false);
       return;
     }
@@ -49,7 +53,6 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
 
     window.history.replaceState(null, "", href);
     window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
-    setActive(href);
     setMenuOpen(false);
   };
 
@@ -61,6 +64,11 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
     }
 
     const updateActiveByScroll = () => {
+      if (pendingActive) {
+        setActive((prev) => (prev === pendingActive ? prev : pendingActive));
+        return;
+      }
+
       const headerHeight = 96;
       const probeLine = window.scrollY + headerHeight + window.innerHeight * 0.2;
       let current = currentItems[0].href;
@@ -92,7 +100,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
       window.removeEventListener("scroll", updateActiveByScroll);
       window.removeEventListener("resize", updateActiveByScroll);
     };
-  }, [currentItems]);
+  }, [currentItems, pendingActive]);
 
   return (
     <header
@@ -123,7 +131,10 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
               <a
                 key={item.label}
                 href={item.href}
-                onClick={() => setActive(item.href)}
+                onClick={(event) => {
+                  event.preventDefault();
+                  goToSection(item.href);
+                }}
                 className={`group relative flex items-center justify-center px-1.5 py-1 text-center transition-colors duration-300 hover:text-[#22e2c2] ${
                   active === item.href ? "text-[#22e2c2]" : ""
                 }`}
@@ -217,15 +228,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
                   >
                     <button
                       type="button"
-                      onPointerUp={(event) => {
-                        event.preventDefault();
-                        goToSection(item.href);
-                      }}
-                      onClick={(event) => {
-                        if (event.detail === 0) {
-                          goToSection(item.href);
-                        }
-                      }}
+                      onClick={() => goToSection(item.href)}
                       className={`block py-2.5 transition-all duration-200 active:scale-[0.99] ${
                         active === item.href
                           ? "text-[#22e2c2] drop-shadow-[0_0_10px_rgba(34,226,194,0.35)]"
