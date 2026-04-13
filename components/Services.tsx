@@ -1,32 +1,42 @@
+type Locale = "es" | "en";
+
 const services = [
   {
     title: "JavaScript",
-    text: "Lo uso para crear interfaces interactivas, validaciones y logica del lado del cliente.",
+    textEs: "Lo uso para crear interfaces interactivas, validaciones y logica del lado del cliente.",
+    textEn: "I use it to build interactive interfaces, validations, and client-side logic.",
     icon: "JS",
   },
   {
     title: "TypeScript",
-    text: "Me permite escribir codigo mas seguro y mantenible con tipado estatico en proyectos reales.",
+    textEs: "Me permite escribir codigo mas seguro y mantenible con tipado estatico en proyectos reales.",
+    textEn: "It lets me write safer, more maintainable code with static typing in real projects.",
     icon: "TS",
   },
   {
     title: "React + Next.js",
-    text: "Desarrollo vistas dinamicas y apps modernas con rutas, componentes reutilizables y SEO.",
+    textEs: "Desarrollo vistas dinamicas y apps modernas con rutas, componentes reutilizables y SEO.",
+    textEn: "I develop dynamic views and modern apps with routing, reusable components, and SEO.",
     icon: "RN",
   },
   {
     title: "SQL",
-    text: "Diseno consultas para organizar datos, reportes y flujos de informacion en bases de datos.",
+    textEs: "Diseno consultas para organizar datos, reportes y flujos de informacion en bases de datos.",
+    textEn: "I design queries to organize data, reports, and information flows in databases.",
     icon: "DB",
   },
 ];
 
-export default function Services() {
+interface ServicesProps {
+  locale: Locale;
+}
+
+export default function Services({ locale }: ServicesProps) {
   return (
     <section id="services" className="scroll-mt-28 space-y-8 md:scroll-mt-32">
       <div className="text-center">
-        <p className="text-sm text-[#8ef0df]">Perfil tecnico</p>
-        <h3 className="text-3xl font-bold text-slate-100">Lenguajes Manejados</h3>
+        <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Perfil tecnico" : "Technical profile"}</p>
+        <h3 className="text-3xl font-bold text-slate-100">{locale === "es" ? "Lenguajes Manejados" : "Languages I work with"}</h3>
       </div>
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -39,7 +49,7 @@ export default function Services() {
               {service.icon}
             </span>
             <h4 className="text-xl font-semibold text-slate-100">{service.title}</h4>
-            <p className="text-sm leading-7 text-slate-300">{service.text}</p>
+            <p className="text-sm leading-7 text-slate-300">{locale === "es" ? service.textEs : service.textEn}</p>
           </article>
         ))}
       </div>

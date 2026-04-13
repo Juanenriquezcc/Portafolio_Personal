@@ -1,32 +1,66 @@
-const academic = [
-  {
-    title: "Ingenieria de Software",
-    place: "Universidad Cooperativa de Colombia",
-    period: "2024 - Actualidad",
-    detail: "Formacion en arquitectura de software, bases de datos, desarrollo web y trabajo colaborativo.",
-  },
-  {
-    title: "Proyectos Universitarios",
-    place: "Semestre 1 - 5",
-    period: "Evolucion continua",
-    detail: "Aplicacion de metodologias agiles, control de versiones y desarrollo de prototipos funcionales.",
-  },
-];
+type Locale = "es" | "en";
 
-const work = [
-  {
-    title: "Proyectos Freelance Academicos",
-    place: "Remoto",
-    period: "2025 - Actualidad",
-    detail: "Creacion de interfaces y prototipos para clientes y companeros, priorizando experiencia de usuario.",
-  },
-  {
-    title: "Practica de Desarrollo",
-    place: "En preparacion",
-    period: "Proximo objetivo",
-    detail: "Enfocado en aplicar conocimientos tecnicos en entornos empresariales y equipos multidisciplinarios.",
-  },
-];
+const academic = {
+  es: [
+    {
+      title: "Ingenieria de Software",
+      place: "Universidad Cooperativa de Colombia",
+      period: "2024 - Actualidad",
+      detail: "Formacion en arquitectura de software, bases de datos, desarrollo web y trabajo colaborativo.",
+    },
+    {
+      title: "Proyectos Universitarios",
+      place: "Semestre 1 - 5",
+      period: "Evolucion continua",
+      detail: "Aplicacion de metodologias agiles, control de versiones y desarrollo de prototipos funcionales.",
+    },
+  ],
+  en: [
+    {
+      title: "Software Engineering",
+      place: "Universidad Cooperativa de Colombia",
+      period: "2024 - Present",
+      detail: "Training in software architecture, databases, web development, and collaborative work.",
+    },
+    {
+      title: "University Projects",
+      place: "Semesters 1 - 5",
+      period: "Continuous growth",
+      detail: "Application of agile methods, version control, and functional prototype development.",
+    },
+  ],
+};
+
+const work = {
+  es: [
+    {
+      title: "Proyectos Freelance Academicos",
+      place: "Remoto",
+      period: "2025 - Actualidad",
+      detail: "Creacion de interfaces y prototipos para clientes y companeros, priorizando experiencia de usuario.",
+    },
+    {
+      title: "Practica de Desarrollo",
+      place: "En preparacion",
+      period: "Proximo objetivo",
+      detail: "Enfocado en aplicar conocimientos tecnicos en entornos empresariales y equipos multidisciplinarios.",
+    },
+  ],
+  en: [
+    {
+      title: "Academic Freelance Projects",
+      place: "Remote",
+      period: "2025 - Present",
+      detail: "Creation of interfaces and prototypes for clients and peers, prioritizing user experience.",
+    },
+    {
+      title: "Development Practice",
+      place: "In preparation",
+      period: "Next goal",
+      detail: "Focused on applying technical knowledge in business environments and multidisciplinary teams.",
+    },
+  ],
+};
 
 function TimelineBlock({
   title,
@@ -54,17 +88,21 @@ function TimelineBlock({
   );
 }
 
-export default function Experience() {
+interface ExperienceProps {
+  locale: Locale;
+}
+
+export default function Experience({ locale }: ExperienceProps) {
   return (
     <section id="experiencia" className="scroll-mt-28 space-y-7 md:scroll-mt-32">
       <div className="text-center">
-        <p className="text-sm text-[#8ef0df]">Trayectoria</p>
-        <h3 className="text-3xl font-bold text-slate-100">Experiencia Academica y Laboral</h3>
+        <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Trayectoria" : "Background"}</p>
+        <h3 className="text-3xl font-bold text-slate-100">{locale === "es" ? "Experiencia Academica y Laboral" : "Academic and Professional Experience"}</h3>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <TimelineBlock title="Experiencia Academica" items={academic} />
-        <TimelineBlock title="Experiencia Laboral" items={work} />
+        <TimelineBlock title={locale === "es" ? "Experiencia Academica" : "Academic Experience"} items={academic[locale]} />
+        <TimelineBlock title={locale === "es" ? "Experiencia Laboral" : "Professional Experience"} items={work[locale]} />
       </div>
     </section>
   );

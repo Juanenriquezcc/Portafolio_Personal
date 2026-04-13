@@ -10,6 +10,8 @@ import Projects from "@/components/ProjectsBook";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
 
+type Locale = "es" | "en";
+
 const bgIcons = [
   { label: "</>", top: "14%", left: "8%", size: "text-3xl", driftX: 22, driftY: 16 },
   { label: "{}", top: "24%", left: "82%", size: "text-4xl", driftX: 18, driftY: 20 },
@@ -32,14 +34,31 @@ const bgIcons = [
   { label: "REACT", top: "90%", left: "76%", size: "text-xl", driftX: 15, driftY: 10 },
 ];
 
+const ambientOrbs = [
+  { top: "8%", left: "5%", size: "h-56 w-56", tint: "bg-cyan-300/18", driftX: 10, driftY: 7 },
+  { top: "18%", left: "72%", size: "h-72 w-72", tint: "bg-teal-300/14", driftX: 12, driftY: 10 },
+  { top: "56%", left: "4%", size: "h-64 w-64", tint: "bg-cyan-200/10", driftX: 14, driftY: 9 },
+  { top: "72%", left: "74%", size: "h-80 w-80", tint: "bg-emerald-300/10", driftX: 11, driftY: 8 },
+];
+
 export default function Home() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [locale, setLocale] = useState<Locale>("es");
 
   const iconOffsets = useMemo(
     () =>
       bgIcons.map((icon) => ({
         x: (mouse.x - 0.5) * icon.driftX,
         y: (mouse.y - 0.5) * icon.driftY,
+      })),
+    [mouse.x, mouse.y],
+  );
+
+  const orbOffsets = useMemo(
+    () =>
+      ambientOrbs.map((orb) => ({
+        x: (mouse.x - 0.5) * orb.driftX,
+        y: (mouse.y - 0.5) * orb.driftY,
       })),
     [mouse.x, mouse.y],
   );
@@ -64,6 +83,21 @@ export default function Home() {
       <div className="pointer-events-none absolute -left-20 top-16 h-72 w-72 rounded-full bg-cyan-300/25 blur-[100px]" />
       <div className="pointer-events-none absolute -right-20 top-64 h-72 w-72 rounded-full bg-teal-300/20 blur-[110px]" />
       <div className="pointer-events-none absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-teal-300/15 blur-[120px]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.02)_0%,transparent_24%,rgba(34,226,194,0.04)_52%,transparent_78%,rgba(255,255,255,0.02)_100%)] opacity-60" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(18,26,40,0.12)_62%,rgba(18,26,40,0.34)_100%)]" />
+
+      {ambientOrbs.map((orb, index) => (
+        <div
+          key={`${orb.top}-${orb.left}`}
+          className={`pointer-events-none absolute ${orb.size} rounded-full ${orb.tint} blur-[120px]`}
+          style={{
+            top: orb.top,
+            left: orb.left,
+            transform: `translate(${orbOffsets[index]?.x ?? 0}px, ${orbOffsets[index]?.y ?? 0}px)`,
+            animationDelay: `${index * 0.8}s`,
+          }}
+        />
+      ))}
 
       {bgIcons.map((icon, index) => (
         <span
@@ -81,22 +115,22 @@ export default function Home() {
         </span>
       ))}
 
-      <Navbar />
+      <Navbar locale={locale} onLocaleChange={setLocale} />
 
       <main className="relative mx-auto flex max-w-6xl flex-col gap-16 px-6 pb-16 pt-28 md:px-10">
-        <Hero />
+        <Hero locale={locale} />
         <div className="section-divider" />
-        <Services />
+        <Services locale={locale} />
         <div className="section-divider" />
-        <Projects />
+        <Projects locale={locale} />
         <div className="section-divider" />
-        <Testimonials />
+        <Testimonials locale={locale} />
         <div className="section-divider" />
-        <Experience />
+        <Experience locale={locale} />
         <div className="section-divider" />
-        <ContactSection />
+        <ContactSection locale={locale} />
         <div className="section-divider" />
-        <Footer />
+        <Footer locale={locale} />
       </main>
     </div>
   );
