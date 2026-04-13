@@ -84,15 +84,15 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           : "border-cyan-600/20 bg-[#f7fbff]/90"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-2.5 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-4 md:px-8 md:py-2.5 lg:gap-6 lg:px-10 lg:py-3.5">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5 sm:px-6 md:gap-4 md:px-8 md:py-3.5 lg:gap-6 lg:px-10 lg:py-4">
         <a
           href="#home"
-          className={`flex flex-row items-center justify-center gap-1.5 md:justify-start ${
+          className={`flex flex-row items-center gap-1.5 ${
             themeMode === "dark" ? "text-slate-100" : "text-slate-800"
           }`}
         >
           <span className="h-2 w-2 rounded-full bg-[#22e2c2]" aria-hidden="true" />
-          <span className="text-sm font-semibold tracking-[0.16em] sm:text-base lg:text-lg">DOBLE J</span>
+          <span className="text-sm font-semibold tracking-[0.16em] sm:text-base md:text-lg lg:text-xl">DOBLE J</span>
         </a>
 
         <nav
@@ -121,11 +121,11 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           </div>
         </nav>
 
-        <div className="flex items-center justify-center gap-1.5 md:justify-end">
+        <div className="relative flex items-center justify-end gap-1.5">
           <button
             type="button"
             onClick={() => onLocaleChange("es")}
-            className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 lg:h-9 lg:w-9 ${
+            className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 md:h-9 md:w-9 lg:h-10 lg:w-10 ${
               locale === "es"
                 ? "border-[#22e2c2] bg-[#22e2c2] text-[#122033] shadow-[0_0_18px_rgba(34,226,194,0.28)]"
                 : themeMode === "dark"
@@ -139,7 +139,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           <button
             type="button"
             onClick={() => onLocaleChange("en")}
-            className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 lg:h-9 lg:w-9 ${
+            className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 md:h-9 md:w-9 lg:h-10 lg:w-10 ${
               locale === "en"
                 ? "border-[#22e2c2] bg-[#22e2c2] text-[#122033] shadow-[0_0_18px_rgba(34,226,194,0.28)]"
                 : themeMode === "dark"
@@ -154,7 +154,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           <button
             type="button"
             onClick={() => onThemeModeChange(themeMode === "dark" ? "light" : "dark")}
-            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 lg:h-9 lg:w-9 ${
+            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 md:h-9 md:w-9 lg:h-10 lg:w-10 ${
               themeMode === "dark"
                 ? "border-[#2ee3c3]/35 bg-[#17273a] text-[#8ef0df] hover:border-[#22e2c2]"
                 : "border-cyan-500/35 bg-white text-cyan-700 hover:border-cyan-600"
@@ -167,7 +167,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 lg:h-9 lg:w-9 xl:hidden ${
+            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 md:h-9 md:w-9 lg:h-10 lg:w-10 xl:hidden ${
               themeMode === "dark"
                 ? "border-[#2ee3c3]/35 bg-[#17273a] text-[#8ef0df] hover:border-[#22e2c2]"
                 : "border-cyan-500/35 bg-white text-cyan-700 hover:border-cyan-600"
@@ -176,38 +176,42 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           >
             {menuOpen ? <X size={14} /> : <Menu size={14} />}
           </button>
-        </div>
 
-        <div className={`xl:hidden ${menuOpen ? "block" : "hidden"}`}>
-          <nav
-            className={`mt-2 rounded-2xl border p-2 ${
-              themeMode === "dark"
-                ? "border-[#2ee3c3]/20 bg-[#162334]/88"
-                : "border-cyan-600/20 bg-white/95"
+          <div
+            className={`pointer-events-none absolute right-0 top-[calc(100%+0.55rem)] z-30 w-[min(19rem,calc(100vw-1.5rem))] origin-top-right transition-all duration-300 xl:hidden ${
+              menuOpen ? "pointer-events-auto translate-y-0 scale-100 opacity-100" : "-translate-y-1 scale-95 opacity-0"
             }`}
           >
-            <div className="grid grid-cols-2 gap-2 text-[11px] sm:text-xs">
-              {currentItems.map((item) => (
-                <a
-                  key={`mobile-${item.label}`}
-                  href={item.href}
-                  onClick={() => {
-                    setActive(item.href);
-                    setMenuOpen(false);
-                  }}
-                  className={`rounded-xl border px-2 py-2 text-center transition-colors duration-300 ${
-                    active === item.href
-                      ? "border-[#22e2c2] bg-[#22e2c2]/15 text-[#22e2c2]"
-                      : themeMode === "dark"
-                        ? "border-[#2ee3c3]/20 bg-[#17273a]/65 text-slate-200 hover:border-[#22e2c2] hover:text-[#22e2c2]"
-                        : "border-cyan-600/20 bg-cyan-50/65 text-slate-700 hover:border-cyan-600 hover:text-cyan-700"
-                  }`}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </nav>
+            <nav
+              className={`rounded-2xl border p-2 shadow-[0_14px_40px_-20px_rgba(15,23,42,0.6)] ${
+                themeMode === "dark"
+                  ? "border-[#2ee3c3]/20 bg-[#162334]/92"
+                  : "border-cyan-600/20 bg-white/96"
+              }`}
+            >
+              <div className="grid grid-cols-2 gap-2 text-[11px] sm:text-xs">
+                {currentItems.map((item) => (
+                  <a
+                    key={`mobile-${item.label}`}
+                    href={item.href}
+                    onClick={() => {
+                      setActive(item.href);
+                      setMenuOpen(false);
+                    }}
+                    className={`rounded-xl border px-2 py-2 text-center transition-colors duration-300 ${
+                      active === item.href
+                        ? "border-[#22e2c2] bg-[#22e2c2]/15 text-[#22e2c2]"
+                        : themeMode === "dark"
+                          ? "border-[#2ee3c3]/20 bg-[#17273a]/65 text-slate-200 hover:border-[#22e2c2] hover:text-[#22e2c2]"
+                          : "border-cyan-600/20 bg-cyan-50/65 text-slate-700 hover:border-cyan-600 hover:text-cyan-700"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </nav>
+          </div>
         </div>
       </div>
     </header>
