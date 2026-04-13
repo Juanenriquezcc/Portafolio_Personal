@@ -82,7 +82,25 @@ interface ServicesProps {
   locale: Locale;
 }
 
+const mobileCopy = {
+  es: {
+    stackTitle: "Stack principal",
+    stackNote: "Tecnologias que uso con mas frecuencia",
+    skillsCompact: "Habilidades clave",
+    more: "+{count} mas",
+  },
+  en: {
+    stackTitle: "Core stack",
+    stackNote: "Technologies I use most often",
+    skillsCompact: "Key skills",
+    more: "+{count} more",
+  },
+};
+
 export default function Services({ locale }: ServicesProps) {
+  const featuredSkills = skills[locale].slice(0, 6);
+  const extraSkillsCount = Math.max(0, skills[locale].length - featuredSkills.length);
+
   return (
     <section id="services" className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32 lg:space-y-8">
       <div className="text-center">
@@ -90,7 +108,31 @@ export default function Services({ locale }: ServicesProps) {
         <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{locale === "es" ? "Mi Stack Tecnologico en Lenguajes" : "My Technology Stack in Languages"}</h3>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-8">
+      <article className="frosted-panel rounded-2xl p-4 md:hidden">
+        <div className="flex items-center justify-between gap-2">
+          <h4 className="text-base font-semibold text-slate-100">{mobileCopy[locale].stackTitle}</h4>
+          <span className="rounded-full border border-[#2ee3c3]/30 bg-[#17273a]/70 px-2.5 py-1 text-[10px] font-semibold text-[#b8fff4]">
+            {services.length}
+          </span>
+        </div>
+        <p className="mt-1 text-xs text-slate-300">{mobileCopy[locale].stackNote}</p>
+
+        <div className="mt-3 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-1">
+          {services.map((service) => (
+            <article
+              key={`mobile-${service.title}`}
+              className="min-w-[132px] snap-start rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/75 p-3 transition-transform duration-300 active:scale-[0.98]"
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#22e2c2]/15 text-[10px] font-semibold text-[#8ef0df]">
+                {service.icon}
+              </span>
+              <p className="mt-2 text-xs font-semibold text-slate-100">{service.title}</p>
+            </article>
+          ))}
+        </div>
+      </article>
+
+      <div className="hidden grid-cols-1 gap-4 sm:grid sm:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-8">
         {services.map((service) => (
           <article
             key={service.title}
@@ -105,7 +147,33 @@ export default function Services({ locale }: ServicesProps) {
         ))}
       </div>
 
-      <article className="frosted-panel rounded-2xl p-4 md:p-6 lg:p-7">
+      <article className="frosted-panel rounded-2xl p-4 md:hidden">
+        <div className="flex items-center justify-between gap-2">
+          <h4 className="text-base font-semibold text-slate-100">{mobileCopy[locale].skillsCompact}</h4>
+          <span className="rounded-full border border-[#2ee3c3]/30 bg-[#17273a]/70 px-2.5 py-1 text-[10px] font-semibold text-[#b8fff4]">
+            {skills[locale].length}
+          </span>
+        </div>
+
+        <div className="mt-3 grid grid-cols-2 gap-2">
+          {featuredSkills.map((skill) => (
+            <span
+              key={`mobile-skill-${skill}`}
+              className="rounded-lg border border-[#2ee3c3]/25 bg-[#17273a]/70 px-2.5 py-2 text-[11px] font-semibold text-[#b8fff4]"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+
+        {extraSkillsCount > 0 && (
+          <p className="mt-3 text-center text-[11px] font-semibold text-[#8ef0df]">
+            {mobileCopy[locale].more.replace("{count}", String(extraSkillsCount))}
+          </p>
+        )}
+      </article>
+
+      <article className="hidden rounded-2xl p-4 md:block md:p-6 lg:p-7 frosted-panel">
         <div className="text-center">
           <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Valor profesional" : "Professional value"}</p>
           <h4 className="mt-1 text-xl font-bold text-slate-100 md:text-2xl">{locale === "es" ? "Mis Habilidades" : "My Skills"}</h4>
