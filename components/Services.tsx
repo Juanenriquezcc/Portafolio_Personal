@@ -115,7 +115,7 @@ export default function Services({ locale }: ServicesProps) {
         <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{locale === "es" ? "Mi Stack Tecnologico en Lenguajes" : "My Technology Stack in Languages"}</h3>
       </div>
 
-      <article className="frosted-panel rounded-2xl p-4 lg:hidden">
+      <article className="frosted-panel rounded-2xl p-4 md:hidden">
         <div className="flex items-center justify-between gap-2">
           <h4 className="text-base font-semibold text-slate-100">{mobileCopy[locale].stackTitle}</h4>
           <span className="rounded-full border border-[#2ee3c3]/30 bg-[#17273a]/70 px-2.5 py-1 text-[10px] font-semibold text-[#b8fff4]">
@@ -194,7 +194,7 @@ export default function Services({ locale }: ServicesProps) {
         )}
       </article>
 
-      <article className="hidden rounded-2xl p-4 lg:block lg:p-7 frosted-panel">
+      <article className="hidden rounded-2xl p-4 md:block md:p-6 lg:p-7 frosted-panel">
         <div className="text-center">
           <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Valor profesional" : "Professional value"}</p>
           <h4 className="mt-1 text-xl font-bold text-slate-100 md:text-2xl">{locale === "es" ? "Mis Habilidades" : "My Skills"}</h4>
