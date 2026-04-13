@@ -157,6 +157,39 @@ html {
   }
 }
 
+@keyframes contactGlowPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 226, 194, 0.18);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(34, 226, 194, 0.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 226, 194, 0.18);
+  }
+}
+
+@keyframes contactShine {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+@keyframes contactOrbFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .role-fade {
   animation: roleFade 4.2s ease-in-out infinite;
 }
@@ -240,6 +273,43 @@ html {
 
 .menu-item-in {
   animation: menuItemIn 320ms ease-out both;
+}
+
+.contact-message-card {
+  animation: contactGlowPulse 5.5s ease-in-out infinite;
+}
+
+.contact-card-orb {
+  opacity: 0.55;
+  filter: blur(2px);
+  animation: contactOrbFloat 7s ease-in-out infinite;
+}
+
+.contact-card-orb-top {
+  background: radial-gradient(circle, rgba(34, 226, 194, 0.28) 0%, rgba(34, 226, 194, 0.05) 65%, transparent 100%);
+}
+
+.contact-card-orb-bottom {
+  background: radial-gradient(circle, rgba(66, 153, 225, 0.2) 0%, rgba(66, 153, 225, 0.04) 65%, transparent 100%);
+  animation-delay: 0.7s;
+}
+
+.contact-send-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-send-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+  height: 100%;
+  width: 34%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.38) 50%, transparent 100%);
+  transform: translateX(-120%);
+  animation: contactShine 3.8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .theme-light .frosted-panel {
@@ -366,4 +436,32 @@ html {
 
 .theme-light footer p {
   color: #334155;
+}
+
+.theme-light .contact-message-card {
+  background: linear-gradient(145deg, rgba(246, 253, 255, 0.97), rgba(233, 246, 255, 0.93));
+  border-color: rgba(14, 116, 144, 0.28);
+  box-shadow: 0 16px 44px -30px rgba(14, 116, 144, 0.3);
+}
+
+.theme-light .contact-input-shell {
+  background: rgba(238, 248, 255, 0.95);
+  border-color: rgba(14, 116, 144, 0.28);
+}
+
+.theme-light .contact-input-shell input,
+.theme-light .contact-input-shell textarea {
+  color: #0f172a;
+}
+
+.theme-light .contact-input-shell input::placeholder,
+.theme-light .contact-input-shell textarea::placeholder {
+  color: #64748b;
+}
+
+.theme-light .contact-send-button {
+  color: #ecfeff;
+  border-color: rgba(14, 116, 144, 0.35);
+  background-image: linear-gradient(90deg, #0e7490 0%, #0f766e 55%, #14b8a6 100%);
+  box-shadow: 0 14px 28px -18px rgba(15, 118, 110, 0.55);
 }

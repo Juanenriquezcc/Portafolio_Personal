@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { Github, Linkedin, Mail, MessageSquare, Send, User } from "lucide-react";
+import { Github, Linkedin, Mail, MessageSquare, Send, Sparkles, User } from "lucide-react";
 
 type Locale = "es" | "en";
 
@@ -123,17 +123,23 @@ export default function ContactSection({ locale }: ContactSectionProps) {
         </article>
       </div>
 
-      <article className="frosted-panel rounded-2xl p-4 md:rounded-3xl md:p-6 lg:p-7">
-        <div className="text-center md:text-left">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8ef0df]">{copy[locale].formTitleAccent}</p>
+      <article className="contact-message-card frosted-panel relative overflow-hidden rounded-2xl p-4 md:rounded-3xl md:p-6 lg:p-7">
+        <span className="contact-card-orb contact-card-orb-top pointer-events-none absolute -right-14 -top-14 h-36 w-36 rounded-full" aria-hidden="true" />
+        <span className="contact-card-orb contact-card-orb-bottom pointer-events-none absolute -bottom-16 -left-12 h-40 w-40 rounded-full" aria-hidden="true" />
+
+        <div className="relative z-10 text-center md:text-left">
+          <p className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#8ef0df]">
+            <Sparkles size={14} />
+            {copy[locale].formTitleAccent}
+          </p>
           <h4 className="mt-1 text-xl font-bold text-slate-100 md:text-2xl">{copy[locale].formTitle}</h4>
           <p className="mx-auto mt-2 max-w-2xl text-xs leading-6 text-slate-300 md:mx-0 md:text-sm md:leading-7">{copy[locale].formDescription}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="mt-5 grid grid-cols-1 gap-3.5 md:mt-6 md:grid-cols-2 md:gap-4.5">
+        <form onSubmit={handleSubmit} className="relative z-10 mt-5 grid grid-cols-1 gap-3.5 md:mt-6 md:grid-cols-2 md:gap-4.5">
           <label className="space-y-1.5">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].nameLabel}</span>
-            <div className="group flex items-center gap-2 rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
+            <div className="contact-input-shell group flex items-center gap-2 rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
               <User size={15} className="text-[#8ef0df] transition-colors duration-300 group-focus-within:text-[#22e2c2]" />
               <input
                 type="text"
@@ -147,7 +153,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
 
           <label className="space-y-1.5">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].emailLabel}</span>
-            <div className="group flex items-center gap-2 rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
+            <div className="contact-input-shell group flex items-center gap-2 rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
               <Mail size={15} className="text-[#8ef0df] transition-colors duration-300 group-focus-within:text-[#22e2c2]" />
               <input
                 type="email"
@@ -161,7 +167,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
 
           <label className="space-y-1.5 md:col-span-2">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].messageLabel}</span>
-            <div className="group rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
+            <div className="contact-input-shell group rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
               <div className="mb-1.5 flex items-center gap-2">
                 <MessageSquare size={15} className="text-[#8ef0df] transition-colors duration-300 group-focus-within:text-[#22e2c2]" />
                 <span className="text-[11px] text-slate-300">{locale === "es" ? "Tu mensaje" : "Your message"}</span>
@@ -179,7 +185,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#2ee3c3]/35 bg-linear-to-r from-[#17304a] via-[#1b3754] to-[#1f3f60] px-4 py-2.5 text-sm font-semibold text-[#9efaf0] transition-transform duration-300 hover:-translate-y-0.5"
+              className="contact-send-button flex w-full items-center justify-center gap-2 rounded-xl border border-[#2ee3c3]/35 bg-linear-to-r from-[#17304a] via-[#1b3754] to-[#1f3f60] px-4 py-2.5 text-sm font-semibold text-[#9efaf0] transition-transform duration-300 hover:-translate-y-0.5"
             >
               <Send size={15} />
               {copy[locale].send}
