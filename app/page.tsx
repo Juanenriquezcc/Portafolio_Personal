@@ -128,7 +128,7 @@ export default function Home() {
         onThemeModeChange={setThemeMode}
       />
 
-      <main className="relative mx-auto flex max-w-6xl flex-col gap-16 px-6 pb-16 pt-28 md:px-10">
+      <main className="relative mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-12 pt-24 sm:gap-12 sm:px-5 md:gap-14 md:px-7 md:pt-26 lg:gap-16 lg:px-10 lg:pb-16 lg:pt-28">
         <Hero locale={locale} />
         <div className="section-divider" />
         <Services locale={locale} />

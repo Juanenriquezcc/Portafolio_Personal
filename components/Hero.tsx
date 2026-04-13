@@ -65,55 +65,55 @@ export default function Hero({ locale }: HeroProps) {
   return (
     <section
       id="home"
-      className="scroll-mt-28 grid grid-cols-1 justify-items-center gap-7 px-2 py-6 text-center md:scroll-mt-32 md:py-8"
+      className="scroll-mt-24 grid grid-cols-1 justify-items-center gap-5 px-1 py-4 text-center md:scroll-mt-28 md:gap-6 md:py-6 lg:scroll-mt-32 lg:gap-7 lg:py-8"
     >
-      <p className="text-lg text-slate-300">
+      <p className="text-base text-slate-300 md:text-lg">
         {copy[locale].intro}, <span className="text-[#4df2d8]">{locale === "es" ? "Soy" : "I am"}</span>
       </p>
 
       <div className="space-y-2">
-        <h1 className="bg-linear-to-r from-white via-[#9efaf0] to-[#22e2c2] bg-clip-text text-4xl font-extrabold leading-tight text-transparent drop-shadow-[0_0_18px_rgba(34,226,194,0.35)] md:text-5xl">
+        <h1 className="bg-linear-to-r from-white via-[#9efaf0] to-[#22e2c2] bg-clip-text text-3xl font-extrabold leading-tight text-transparent drop-shadow-[0_0_18px_rgba(34,226,194,0.35)] md:text-4xl lg:text-5xl">
           Juan Jose Enriquez Cordoba
         </h1>
         <h2
-          className={`h-8 text-xl font-semibold text-[#b7fbf1] transition-all duration-200 md:text-2xl ${
+          className={`h-7 text-lg font-semibold text-[#b7fbf1] transition-all duration-200 md:h-8 md:text-xl lg:text-2xl ${
             roleVisible ? "translate-y-0 opacity-100 blur-0" : "-translate-y-1 opacity-0 blur-[1px]"
           }`}
         >
           {roles[roleIndex]}
         </h2>
-        <div className="mx-auto flex max-w-fit items-center justify-center rounded-full border border-[#2ee3c3]/25 bg-[#17273a]/70 px-4 py-2 text-[11px] font-semibold tracking-[0.12em] text-[#8ef0df] shadow-[0_0_22px_rgba(34,226,194,0.12)] md:text-xs">
+        <div className="mx-auto flex max-w-fit items-center justify-center rounded-full border border-[#2ee3c3]/25 bg-[#17273a]/70 px-3 py-1.5 text-[10px] font-semibold tracking-[0.1em] text-[#8ef0df] shadow-[0_0_22px_rgba(34,226,194,0.12)] md:px-4 md:py-2 md:text-xs">
           {copy[locale].badge}
         </div>
-        <p className="mx-auto mt-4 max-w-3xl text-sm leading-8 text-slate-200 md:text-base">
+        <p className="mx-auto mt-3 max-w-3xl text-sm leading-6 text-slate-200 md:mt-4 md:leading-7 md:text-base">
           {copy[locale].paragraph}
         </p>
       </div>
 
-      <div className="flex flex-row flex-wrap items-center justify-center gap-4">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:gap-4">
         <a
           href="tel:+573157614544"
-          className="rounded-full border border-[#43ecd2]/45 bg-[#1a2a3d] px-6 py-3 text-sm font-semibold text-slate-100 shadow-[0_0_22px_rgba(34,226,194,0.22)] transition-transform duration-500 hover:-translate-y-1"
+          className="rounded-full border border-[#43ecd2]/45 bg-[#1a2a3d] px-4 py-2.5 text-xs font-semibold text-slate-100 shadow-[0_0_22px_rgba(34,226,194,0.22)] transition-transform duration-500 hover:-translate-y-1 md:px-5 md:py-3 md:text-sm"
         >
-          {copy[locale].contact}: <span className="text-base text-[#4df2d8]">+57 315 7614 544</span>
+          {copy[locale].contact}: <span className="text-sm text-[#4df2d8] md:text-base">+57 315 7614 544</span>
         </a>
         <a
           href="/cv-juan-jose-enriquez.pdf"
           download="HOJA_DE_VIDA_JUAN_JOSE_ENRIQUEZ.pdf"
-          className="rounded-full border border-[#2ee3c3]/35 bg-[#17273a] px-6 py-3 text-sm font-semibold text-slate-100 transition-colors hover:bg-[#20344b]"
+          className="rounded-full border border-[#2ee3c3]/35 bg-[#17273a] px-4 py-2.5 text-xs font-semibold text-slate-100 transition-colors hover:bg-[#20344b] md:px-5 md:py-3 md:text-sm"
         >
           {copy[locale].cv}
         </a>
       </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-3 pt-2 text-slate-300">
-        <span className="mr-2 text-sm text-slate-400">{copy[locale].links}</span>
+      <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1.5 text-slate-300 md:gap-3 md:pt-2">
+        <span className="mr-1 text-xs text-slate-400 md:mr-2 md:text-sm">{copy[locale].links}</span>
         <a
           href="https://github.com/Juanenriquezcc"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2] md:h-10 md:w-10"
         >
           <Github size={16} />
         </a>
@@ -122,7 +122,7 @@ export default function Hero({ locale }: HeroProps) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2]"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-[#2ee3c3]/35 bg-[#182738] text-[#8ef0df] hover:border-[#22e2c2] md:h-10 md:w-10"
         >
           <Linkedin size={16} />
         </a>

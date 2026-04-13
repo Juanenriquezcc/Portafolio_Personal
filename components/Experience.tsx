@@ -70,17 +70,17 @@ function TimelineBlock({
   items: Array<{ title: string; place: string; period: string; detail: string }>;
 }) {
   return (
-    <article className="frosted-panel rounded-2xl p-6">
-      <h4 className="text-xl font-semibold text-slate-100">{title}</h4>
-      <div className="mt-4 space-y-4">
+    <article className="frosted-panel rounded-2xl p-4 md:p-5 lg:p-6">
+      <h4 className="text-lg font-semibold text-slate-100 md:text-xl">{title}</h4>
+      <div className="mt-3 space-y-3 md:mt-4 md:space-y-4">
         {items.map((item) => (
-          <div key={`${item.title}-${item.place}`} className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-4">
+          <div key={`${item.title}-${item.place}`} className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-3 md:p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="font-semibold text-[#b8fff4]">{item.title}</p>
+              <p className="text-sm font-semibold text-[#b8fff4] md:text-base">{item.title}</p>
               <span className="text-xs text-slate-400">{item.period}</span>
             </div>
-            <p className="text-sm text-slate-300">{item.place}</p>
-            <p className="mt-2 text-sm leading-7 text-slate-300">{item.detail}</p>
+            <p className="text-xs text-slate-300 md:text-sm">{item.place}</p>
+            <p className="mt-2 text-xs leading-6 text-slate-300 md:text-sm md:leading-7">{item.detail}</p>
           </div>
         ))}
       </div>
@@ -94,10 +94,10 @@ interface ExperienceProps {
 
 export default function Experience({ locale }: ExperienceProps) {
   return (
-    <section id="experiencia" className="scroll-mt-28 space-y-7 md:scroll-mt-32">
+    <section id="experiencia" className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32">
       <div className="text-center">
         <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Trayectoria" : "Background"}</p>
-        <h3 className="text-3xl font-bold text-slate-100">{locale === "es" ? "Experiencia Academica y Laboral" : "Academic and Professional Experience"}</h3>
+        <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{locale === "es" ? "Experiencia Academica y Laboral" : "Academic and Professional Experience"}</h3>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">

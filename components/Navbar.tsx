@@ -83,7 +83,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           : "border-cyan-600/20 bg-[#f7fbff]/90"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-2.5 px-4 py-3 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-6 md:px-10 md:py-3.5">
+      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-2.5 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-4 md:px-8 md:py-2.5 lg:gap-6 lg:px-10 lg:py-3.5">
         <a
           href="#home"
           className={`flex flex-row items-center justify-center gap-1.5 md:justify-start ${
@@ -91,21 +91,21 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           }`}
         >
           <span className="h-2 w-2 rounded-full bg-[#22e2c2]" aria-hidden="true" />
-          <span className="text-base font-semibold tracking-[0.16em] sm:text-lg">DOBLE J</span>
+          <span className="text-sm font-semibold tracking-[0.16em] sm:text-base lg:text-lg">DOBLE J</span>
         </a>
 
         <nav
-          className={`flex items-center justify-center text-[11px] sm:text-xs md:text-sm ${
+          className={`flex items-center justify-center text-[10px] sm:text-[11px] md:text-xs lg:text-sm ${
             themeMode === "dark" ? "text-slate-300" : "text-slate-700"
           }`}
         >
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:gap-x-6 md:gap-x-7">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 sm:gap-x-5 md:gap-x-5 lg:gap-x-7">
             {currentItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={() => setActive(item.href)}
-                className={`group relative flex items-center justify-center px-2 py-1.5 text-center transition-colors duration-300 hover:text-[#22e2c2] ${
+                className={`group relative flex items-center justify-center px-1.5 py-1 text-center transition-colors duration-300 hover:text-[#22e2c2] ${
                   active === item.href ? "text-[#22e2c2]" : ""
                 }`}
               >
@@ -120,11 +120,11 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           </div>
         </nav>
 
-        <div className="flex items-center justify-center gap-2 md:justify-end">
+        <div className="flex items-center justify-center gap-1.5 md:justify-end">
           <button
             type="button"
             onClick={() => onLocaleChange("es")}
-            className={`flex h-9 w-9 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 ${
+            className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 lg:h-9 lg:w-9 ${
               locale === "es"
                 ? "border-[#22e2c2] bg-[#22e2c2] text-[#122033] shadow-[0_0_18px_rgba(34,226,194,0.28)]"
                 : themeMode === "dark"
@@ -138,7 +138,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           <button
             type="button"
             onClick={() => onLocaleChange("en")}
-            className={`flex h-9 w-9 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 ${
+            className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 lg:h-9 lg:w-9 ${
               locale === "en"
                 ? "border-[#22e2c2] bg-[#22e2c2] text-[#122033] shadow-[0_0_18px_rgba(34,226,194,0.28)]"
                 : themeMode === "dark"
@@ -153,7 +153,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
           <button
             type="button"
             onClick={() => onThemeModeChange(themeMode === "dark" ? "light" : "dark")}
-            className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 ${
+            className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 lg:h-9 lg:w-9 ${
               themeMode === "dark"
                 ? "border-[#2ee3c3]/35 bg-[#17273a] text-[#8ef0df] hover:border-[#22e2c2]"
                 : "border-cyan-500/35 bg-white text-cyan-700 hover:border-cyan-600"

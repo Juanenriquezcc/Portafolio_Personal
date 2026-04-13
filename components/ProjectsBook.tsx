@@ -87,11 +87,11 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
   const currentState = locale === "es" ? current.stateEs : current.stateEn;
 
   return (
-    <section id="projects" className="scroll-mt-28 space-y-8 md:scroll-mt-32">
+    <section id="projects" className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32 lg:space-y-8">
       <div className="text-center">
         <p className={`text-sm ${themeMode === "dark" ? "text-[#8ef0df]" : "text-cyan-700"}`}>{locale === "es" ? "Portafolio en crecimiento" : "Growing portfolio"}</p>
-        <h3 className={`text-3xl font-bold ${themeMode === "dark" ? "text-slate-100" : "text-slate-800"}`}>{locale === "es" ? "Mis Proyectos" : "My Projects"}</h3>
-        <p className={`mx-auto mt-3 max-w-2xl text-sm ${themeMode === "dark" ? "text-slate-300" : "text-slate-600"}`}>
+        <h3 className={`text-2xl font-bold md:text-[1.75rem] lg:text-3xl ${themeMode === "dark" ? "text-slate-100" : "text-slate-800"}`}>{locale === "es" ? "Mis Proyectos" : "My Projects"}</h3>
+        <p className={`mx-auto mt-2 max-w-2xl text-xs md:mt-3 md:text-sm ${themeMode === "dark" ? "text-slate-300" : "text-slate-600"}`}>
           {locale === "es"
             ? "Explora mis proyectos como si pasaras paginas: cada vista muestra contexto visual, tecnologias y objetivo principal."
             : "Explore my projects as if turning pages: each view shows visual context, technologies, and the main goal."}
@@ -177,7 +177,7 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
         </div>
       </div>
 
-      <div className="space-y-4 md:hidden">
+      <div className="space-y-3 md:hidden">
         <article key={`mobile-${currentTitle}`} className="book-page-mobile frosted-panel overflow-hidden rounded-2xl">
           <div className="overflow-hidden border-b border-[#2ee3c3]/20">
             <Image
@@ -188,10 +188,10 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
               className="aspect-16/10 h-full w-full object-cover"
             />
           </div>
-          <div className="space-y-3 p-5">
+          <div className="space-y-2.5 p-4">
             <p className="text-[11px] uppercase tracking-[0.14em] text-[#8ef0df]">{locale === "es" ? "Proyecto activo" : "Active project"}</p>
-            <h4 className="text-xl font-semibold text-slate-100">{currentTitle}</h4>
-            <p className="text-sm leading-7 text-slate-300">{currentText}</p>
+            <h4 className="text-lg font-semibold text-slate-100">{currentTitle}</h4>
+            <p className="text-xs leading-6 text-slate-300">{currentText}</p>
             <div className="flex flex-wrap gap-2">
               <span className="rounded-full border border-[#2ee3c3]/30 px-3 py-1 text-[11px] font-semibold text-slate-200">
                 {currentStack}
