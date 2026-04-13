@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 type Locale = "es" | "en";
 
 const services = [
@@ -88,17 +92,20 @@ const mobileCopy = {
     stackNote: "Tecnologias que uso con mas frecuencia",
     skillsCompact: "Habilidades clave",
     more: "+{count} mas",
+    less: "Ver menos",
   },
   en: {
     stackTitle: "Core stack",
     stackNote: "Technologies I use most often",
     skillsCompact: "Key skills",
     more: "+{count} more",
+    less: "Show less",
   },
 };
 
 export default function Services({ locale }: ServicesProps) {
-  const featuredSkills = skills[locale].slice(0, 6);
+  const [showAllCompactSkills, setShowAllCompactSkills] = useState(false);
+  const featuredSkills = showAllCompactSkills ? skills[locale] : skills[locale].slice(0, 6);
   const extraSkillsCount = Math.max(0, skills[locale].length - featuredSkills.length);
 
   return (
@@ -108,7 +115,7 @@ export default function Services({ locale }: ServicesProps) {
         <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{locale === "es" ? "Mi Stack Tecnologico en Lenguajes" : "My Technology Stack in Languages"}</h3>
       </div>
 
-      <article className="frosted-panel rounded-2xl p-4 md:hidden">
+      <article className="frosted-panel rounded-2xl p-4 lg:hidden">
         <div className="flex items-center justify-between gap-2">
           <h4 className="text-base font-semibold text-slate-100">{mobileCopy[locale].stackTitle}</h4>
           <span className="rounded-full border border-[#2ee3c3]/30 bg-[#17273a]/70 px-2.5 py-1 text-[10px] font-semibold text-[#b8fff4]">
@@ -132,7 +139,7 @@ export default function Services({ locale }: ServicesProps) {
         </div>
       </article>
 
-      <div className="hidden grid-cols-1 gap-4 sm:grid sm:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-8">
+      <div className="hidden grid-cols-1 gap-4 lg:grid lg:grid-cols-4 lg:gap-8">
         {services.map((service) => (
           <article
             key={service.title}
@@ -147,7 +154,7 @@ export default function Services({ locale }: ServicesProps) {
         ))}
       </div>
 
-      <article className="frosted-panel rounded-2xl p-4 md:hidden">
+      <article className="frosted-panel rounded-2xl p-4 lg:hidden">
         <div className="flex items-center justify-between gap-2">
           <h4 className="text-base font-semibold text-slate-100">{mobileCopy[locale].skillsCompact}</h4>
           <span className="rounded-full border border-[#2ee3c3]/30 bg-[#17273a]/70 px-2.5 py-1 text-[10px] font-semibold text-[#b8fff4]">
@@ -166,14 +173,28 @@ export default function Services({ locale }: ServicesProps) {
           ))}
         </div>
 
-        {extraSkillsCount > 0 && (
-          <p className="mt-3 text-center text-[11px] font-semibold text-[#8ef0df]">
+        {extraSkillsCount > 0 ? (
+          <button
+            type="button"
+            onClick={() => setShowAllCompactSkills(true)}
+            className="mt-3 block w-full text-center text-[11px] font-semibold text-[#8ef0df] transition-colors hover:text-[#b8fff4]"
+          >
             {mobileCopy[locale].more.replace("{count}", String(extraSkillsCount))}
-          </p>
+          </button>
+        ) : (
+          skills[locale].length > 6 && (
+            <button
+              type="button"
+              onClick={() => setShowAllCompactSkills(false)}
+              className="mt-3 block w-full text-center text-[11px] font-semibold text-[#8ef0df] transition-colors hover:text-[#b8fff4]"
+            >
+              {mobileCopy[locale].less}
+            </button>
+          )
         )}
       </article>
 
-      <article className="hidden rounded-2xl p-4 md:block md:p-6 lg:p-7 frosted-panel">
+      <article className="hidden rounded-2xl p-4 lg:block lg:p-7 frosted-panel">
         <div className="text-center">
           <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Valor profesional" : "Professional value"}</p>
           <h4 className="mt-1 text-xl font-bold text-slate-100 md:text-2xl">{locale === "es" ? "Mis Habilidades" : "My Skills"}</h4>
