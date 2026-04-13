@@ -146,6 +146,17 @@ html {
   }
 }
 
+@keyframes menuItemIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .role-fade {
   animation: roleFade 4.2s ease-in-out infinite;
 }
@@ -225,4 +236,8 @@ html {
   animation: pageTurn 620ms ease-out;
   transform-origin: center;
   box-shadow: 0 16px 42px -30px rgba(34, 226, 194, 0.45);
+}
+
+.menu-item-in {
+  animation: menuItemIn 320ms ease-out both;
 }

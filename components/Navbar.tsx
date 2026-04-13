@@ -213,15 +213,19 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
                     key={`mobile-${item.label}`}
                     className={`border-b ${
                       themeMode === "dark" ? "border-[#2ee3c3]/15" : "border-cyan-600/15"
-                    } last:border-b-0`}
+                    } ${menuOpen ? "menu-item-in" : ""} last:border-b-0`}
                   >
                     <button
                       type="button"
-                      onTouchEnd={(event) => {
+                      onPointerUp={(event) => {
                         event.preventDefault();
                         goToSection(item.href);
                       }}
-                      onClick={() => goToSection(item.href)}
+                      onClick={(event) => {
+                        if (event.detail === 0) {
+                          goToSection(item.href);
+                        }
+                      }}
                       className={`block py-2.5 transition-all duration-200 active:scale-[0.99] ${
                         active === item.href
                           ? "text-[#22e2c2] drop-shadow-[0_0_10px_rgba(34,226,194,0.35)]"
@@ -229,7 +233,11 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
                             ? "text-slate-200 hover:text-[#22e2c2] active:text-[#22e2c2]"
                             : "text-slate-700 hover:text-cyan-700 active:text-cyan-700"
                       } w-full text-left`}
-                      style={{ WebkitTapHighlightColor: "rgba(34, 226, 194, 0.18)" }}
+                      style={{
+                        WebkitTapHighlightColor: "rgba(34, 226, 194, 0.18)",
+                        animationDelay: `${50 * (currentItems.findIndex((navItem) => navItem.href === item.href) + 1)}ms`,
+                      }}
+                      aria-current={active === item.href ? "page" : undefined}
                     >
                       {item.label}
                     </button>
