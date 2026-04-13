@@ -183,33 +183,41 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
             }`}
           >
             <nav
-              className={`rounded-2xl border p-2 shadow-[0_14px_40px_-20px_rgba(15,23,42,0.6)] ${
+              className={`rounded-2xl border p-3 shadow-[0_14px_40px_-20px_rgba(15,23,42,0.6)] ${
                 themeMode === "dark"
                   ? "border-[#2ee3c3]/20 bg-[#162334]/92"
                   : "border-cyan-600/20 bg-white/96"
               }`}
             >
-              <div className="flex flex-col gap-1.5 text-[11px] sm:text-xs">
+              <ul className="flex flex-col text-[12px] sm:text-[13px]">
                 {currentItems.map((item) => (
-                  <a
+                  <li
                     key={`mobile-${item.label}`}
-                    href={item.href}
-                    onClick={() => {
-                      setActive(item.href);
-                      setMenuOpen(false);
-                    }}
-                    className={`rounded-xl border px-3 py-2.5 text-left transition-colors duration-300 ${
-                      active === item.href
-                        ? "border-[#22e2c2] bg-[#22e2c2]/15 text-[#22e2c2]"
-                        : themeMode === "dark"
-                          ? "border-[#2ee3c3]/20 bg-[#17273a]/65 text-slate-200 hover:border-[#22e2c2] hover:text-[#22e2c2]"
-                          : "border-cyan-600/20 bg-cyan-50/65 text-slate-700 hover:border-cyan-600 hover:text-cyan-700"
-                    }`}
+                    className={`border-b ${
+                      themeMode === "dark" ? "border-[#2ee3c3]/15" : "border-cyan-600/15"
+                    } last:border-b-0`}
                   >
-                    {item.label}
-                  </a>
+                    <a
+                      href={item.href}
+                      onTouchStart={() => setActive(item.href)}
+                      onClick={() => {
+                        setActive(item.href);
+                        setMenuOpen(false);
+                      }}
+                      className={`block py-2.5 transition-all duration-200 active:scale-[0.99] ${
+                        active === item.href
+                          ? "text-[#22e2c2] drop-shadow-[0_0_10px_rgba(34,226,194,0.35)]"
+                          : themeMode === "dark"
+                            ? "text-slate-200 hover:text-[#22e2c2] active:text-[#22e2c2]"
+                            : "text-slate-700 hover:text-cyan-700 active:text-cyan-700"
+                      }`}
+                      style={{ WebkitTapHighlightColor: "rgba(34, 226, 194, 0.18)" }}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </nav>
           </div>
         </div>

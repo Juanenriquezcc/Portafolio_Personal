@@ -7,6 +7,7 @@ const copy = {
     tag: "Contactos",
     title: "Conectemos",
     phone: "Telefono",
+    location: "Ubicacion",
     github: "Ver perfil y repositorios",
     linkedin: "Ver perfil profesional",
   },
@@ -14,6 +15,7 @@ const copy = {
     tag: "Contact",
     title: "Let's connect",
     phone: "Phone",
+    location: "Location",
     github: "View profile and repositories",
     linkedin: "View professional profile",
   },
@@ -31,12 +33,17 @@ export default function ContactSection({ locale }: ContactSectionProps) {
         <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{copy[locale].title}</h3>
       </div>
 
-      <div className="frosted-panel grid grid-cols-1 gap-4 rounded-2xl p-4 md:grid-cols-3 md:gap-5 md:rounded-3xl md:p-6 lg:p-7">
+      <div className="frosted-panel grid grid-cols-1 gap-4 rounded-2xl p-4 md:grid-cols-2 md:gap-5 md:rounded-3xl md:p-6 lg:grid-cols-4 lg:p-7">
         <article className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-4 md:rounded-2xl md:p-5">
           <p className="text-xs uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].phone}</p>
           <a href="tel:+573157614544" className="mt-2 block text-base font-semibold text-slate-100 hover:text-[#22e2c2] md:text-lg">
             +57 315 7614 544
           </a>
+        </article>
+
+        <article className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-4 md:rounded-2xl md:p-5">
+          <p className="text-xs uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].location}</p>
+          <p className="mt-2 text-base font-semibold text-slate-100 md:text-lg">Colombia, Pasto, Nariño</p>
         </article>
 
         <article className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-4 md:rounded-2xl md:p-5">
