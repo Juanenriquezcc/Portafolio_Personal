@@ -297,3 +297,45 @@ html {
 .theme-light .section-divider {
   opacity: 0.9;
 }
+
+.theme-light .text-\[\#4df2d8\] {
+  color: #0f766e;
+}
+
+.theme-light .text-\[\#b7fbf1\] {
+  color: #0f766e;
+}
+
+.theme-light #home h1.bg-linear-to-r {
+  background-image: linear-gradient(90deg, #0f172a 0%, #155e75 55%, #0d9488 100%);
+  filter: drop-shadow(0 0 10px rgba(13, 148, 136, 0.18));
+}
+
+.theme-light .book-shell {
+  border-color: rgba(13, 148, 136, 0.28);
+  background: linear-gradient(145deg, rgba(245, 252, 255, 0.95), rgba(234, 245, 255, 0.9));
+  box-shadow: 0 18px 54px -34px rgba(8, 47, 73, 0.24);
+}
+
+.theme-light .book-spine {
+  background: linear-gradient(180deg, rgba(13, 148, 136, 0.06), rgba(13, 148, 136, 0.38), rgba(13, 148, 136, 0.06));
+}
+
+.theme-light .book-page-left,
+.theme-light .book-page-right {
+  background: linear-gradient(145deg, rgba(248, 253, 255, 0.95), rgba(236, 247, 255, 0.9));
+}
+
+.theme-light .bg-\[\#16283d\],
+.theme-light .bg-\[\#1f3550\] {
+  background-color: rgba(226, 243, 255, 0.95);
+}
+
+.theme-light .text-\[\#9efaf0\] {
+  color: #0f766e;
+}
+
+.theme-light footer.bg-\[\#182334\]\/80 {
+  background-color: rgba(241, 250, 255, 0.94);
+  box-shadow: 0 14px 36px -26px rgba(8, 47, 73, 0.22);
+}
