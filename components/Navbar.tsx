@@ -56,6 +56,10 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
     setMenuOpen(false);
   };
 
+  const handleMenuItemActivate = (href: string) => {
+    goToSection(href);
+  };
+
   useEffect(() => {
     // Evita que el navegador restaure anclas al recargar y fuerza estado inicial en INICIO.
     if (window.location.hash && window.location.hash !== "#home") {
@@ -226,7 +230,13 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
                   >
                     <button
                       type="button"
-                      onClick={() => goToSection(item.href)}
+                      onPointerUp={() => handleMenuItemActivate(item.href)}
+                      onClick={(event) => {
+                        // detail === 0 normalmente representa activacion por teclado.
+                        if (event.detail === 0) {
+                          handleMenuItemActivate(item.href);
+                        }
+                      }}
                       className={`block py-2 transition-all duration-200 active:scale-[0.99] ${
                         active === item.href
                           ? "text-[#22e2c2] drop-shadow-[0_0_10px_rgba(34,226,194,0.35)]"
