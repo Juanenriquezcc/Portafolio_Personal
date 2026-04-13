@@ -57,43 +57,14 @@ export default function Navbar({ locale, onLocaleChange }: NavbarProps) {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[#2ee3c3]/20 bg-[#121a28]/82 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-2 sm:px-6 sm:py-3 md:px-10">
-        <div className="flex items-center justify-between gap-3">
-          <a href="#home" className="flex flex-row items-center gap-1.5 text-slate-100">
-            <span className="h-2 w-2 rounded-full bg-[#22e2c2]" aria-hidden="true" />
-            <span className="text-sm font-semibold tracking-[0.16em] sm:text-base">DOBLE J</span>
-          </a>
-
-          <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => onLocaleChange("es")}
-              className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 ${
-                locale === "es"
-                  ? "border-[#22e2c2] bg-[#22e2c2] text-[#122033] shadow-[0_0_18px_rgba(34,226,194,0.28)]"
-                  : "border-[#2ee3c3]/30 bg-[#17273a] text-slate-200 hover:border-[#22e2c2]"
-              }`}
-              aria-label="Cambiar a español"
-            >
-              ES
-            </button>
-            <button
-              type="button"
-              onClick={() => onLocaleChange("en")}
-              className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 ${
-                locale === "en"
-                  ? "border-[#22e2c2] bg-[#22e2c2] text-[#122033] shadow-[0_0_18px_rgba(34,226,194,0.28)]"
-                  : "border-[#2ee3c3]/30 bg-[#17273a] text-slate-200 hover:border-[#22e2c2]"
-              }`}
-              aria-label="Switch to English"
-            >
-              EN
-            </button>
-          </div>
-        </div>
+      <div className="mx-auto flex max-w-6xl flex-col gap-1.5 px-4 py-2 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-4 md:px-10 md:py-2.5">
+        <a href="#home" className="flex flex-row items-center justify-center gap-1.5 text-slate-100 md:justify-start">
+          <span className="h-2 w-2 rounded-full bg-[#22e2c2]" aria-hidden="true" />
+          <span className="text-sm font-semibold tracking-[0.16em] sm:text-base">DOBLE J</span>
+        </a>
 
         <nav className="flex items-center justify-center text-[10px] text-slate-300 sm:text-[11px] md:text-sm">
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 sm:gap-x-5 md:gap-x-7">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 sm:gap-x-5 md:gap-x-6">
             {currentItems.map((item) => (
               <a
                 key={item.label}
@@ -113,6 +84,33 @@ export default function Navbar({ locale, onLocaleChange }: NavbarProps) {
             ))}
           </div>
         </nav>
+
+        <div className="flex items-center justify-center gap-1.5 md:justify-end">
+          <button
+            type="button"
+            onClick={() => onLocaleChange("es")}
+            className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 ${
+              locale === "es"
+                ? "border-[#22e2c2] bg-[#22e2c2] text-[#122033] shadow-[0_0_18px_rgba(34,226,194,0.28)]"
+                : "border-[#2ee3c3]/30 bg-[#17273a] text-slate-200 hover:border-[#22e2c2]"
+            }`}
+            aria-label="Cambiar a español"
+          >
+            ES
+          </button>
+          <button
+            type="button"
+            onClick={() => onLocaleChange("en")}
+            className={`flex h-8 w-8 items-center justify-center rounded-full border text-[10px] font-semibold transition-all duration-300 ${
+              locale === "en"
+                ? "border-[#22e2c2] bg-[#22e2c2] text-[#122033] shadow-[0_0_18px_rgba(34,226,194,0.28)]"
+                : "border-[#2ee3c3]/30 bg-[#17273a] text-slate-200 hover:border-[#22e2c2]"
+            }`}
+            aria-label="Switch to English"
+          >
+            EN
+          </button>
+        </div>
       </div>
     </header>
   );
