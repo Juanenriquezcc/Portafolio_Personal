@@ -11,6 +11,7 @@ import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
 
 type Locale = "es" | "en";
+type ThemeMode = "dark" | "light";
 
 const bgIcons = [
   { label: "</>", top: "14%", left: "8%", size: "text-3xl", driftX: 22, driftY: 16 },
@@ -44,6 +45,7 @@ const ambientOrbs = [
 export default function Home() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [locale, setLocale] = useState<Locale>("es");
+  const [themeMode, setThemeMode] = useState<ThemeMode>("dark");
 
   const iconOffsets = useMemo(
     () =>
@@ -65,7 +67,11 @@ export default function Home() {
 
   return (
     <div
-      className="relative min-h-screen overflow-x-hidden bg-[radial-gradient(circle_at_10%_12%,rgba(46,227,195,0.22),transparent_30%),radial-gradient(circle_at_86%_28%,rgba(34,226,194,0.14),transparent_34%),linear-gradient(180deg,#121a28_0%,#171f30_44%,#121a28_100%)]"
+      className={`relative min-h-screen overflow-x-hidden ${
+        themeMode === "dark"
+          ? "bg-[radial-gradient(circle_at_10%_12%,rgba(46,227,195,0.22),transparent_30%),radial-gradient(circle_at_86%_28%,rgba(34,226,194,0.14),transparent_34%),linear-gradient(180deg,#121a28_0%,#171f30_44%,#121a28_100%)]"
+          : "bg-[radial-gradient(circle_at_12%_10%,rgba(29,192,178,0.25),transparent_34%),radial-gradient(circle_at_86%_22%,rgba(66,153,225,0.20),transparent_34%),linear-gradient(180deg,#f6fcff_0%,#edf6ff_44%,#eaf5ff_100%)]"
+      }`}
       onMouseMove={(event) => {
         const x = event.clientX / window.innerWidth;
         const y = event.clientY / window.innerHeight;
@@ -80,16 +86,16 @@ export default function Home() {
       }}
     >
       <div className="pointer-events-none absolute inset-0 opacity-22" style={{ backgroundImage: "radial-gradient(rgba(46,227,195,0.14) 0.5px, transparent 0.5px)", backgroundSize: "3px 3px" }} />
-      <div className="pointer-events-none absolute -left-20 top-16 h-72 w-72 rounded-full bg-cyan-300/25 blur-[100px]" />
-      <div className="pointer-events-none absolute -right-20 top-64 h-72 w-72 rounded-full bg-teal-300/20 blur-[110px]" />
-      <div className="pointer-events-none absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-teal-300/15 blur-[120px]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.02)_0%,transparent_24%,rgba(34,226,194,0.04)_52%,transparent_78%,rgba(255,255,255,0.02)_100%)] opacity-60" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(18,26,40,0.12)_62%,rgba(18,26,40,0.34)_100%)]" />
+      <div className={`pointer-events-none absolute -left-20 top-16 h-72 w-72 rounded-full blur-[100px] ${themeMode === "dark" ? "bg-cyan-300/25" : "bg-cyan-400/20"}`} />
+      <div className={`pointer-events-none absolute -right-20 top-64 h-72 w-72 rounded-full blur-[110px] ${themeMode === "dark" ? "bg-teal-300/20" : "bg-blue-300/20"}`} />
+      <div className={`pointer-events-none absolute bottom-0 left-1/3 h-80 w-80 rounded-full blur-[120px] ${themeMode === "dark" ? "bg-teal-300/15" : "bg-sky-300/20"}`} />
+      <div className={`pointer-events-none absolute inset-0 opacity-60 ${themeMode === "dark" ? "bg-[linear-gradient(135deg,rgba(255,255,255,0.02)_0%,transparent_24%,rgba(34,226,194,0.04)_52%,transparent_78%,rgba(255,255,255,0.02)_100%)]" : "bg-[linear-gradient(135deg,rgba(12,84,96,0.05)_0%,transparent_28%,rgba(55,125,255,0.06)_56%,transparent_78%,rgba(12,84,96,0.05)_100%)]"}`} />
+      <div className={`pointer-events-none absolute inset-0 ${themeMode === "dark" ? "bg-[radial-gradient(circle_at_center,transparent_0%,rgba(18,26,40,0.12)_62%,rgba(18,26,40,0.34)_100%)]" : "bg-[radial-gradient(circle_at_center,transparent_0%,rgba(213,232,247,0.18)_62%,rgba(227,240,250,0.28)_100%)]"}`} />
 
       {ambientOrbs.map((orb, index) => (
         <div
           key={`${orb.top}-${orb.left}`}
-          className={`pointer-events-none absolute ${orb.size} rounded-full ${orb.tint} blur-[120px]`}
+          className={`pointer-events-none absolute ${orb.size} rounded-full blur-[120px] ${themeMode === "dark" ? orb.tint : "bg-cyan-300/16"}`}
           style={{
             top: orb.top,
             left: orb.left,
@@ -102,7 +108,7 @@ export default function Home() {
       {bgIcons.map((icon, index) => (
         <span
           key={`${icon.label}-${icon.top}`}
-          className={`bg-icon-water pointer-events-none absolute ${icon.size} select-none font-bold text-[#7ff3e1]/20`}
+          className={`bg-icon-water pointer-events-none absolute ${icon.size} select-none font-bold ${themeMode === "dark" ? "text-[#7ff3e1]/20" : "text-cyan-700/20"}`}
           style={{
             top: icon.top,
             left: icon.left,
@@ -115,14 +121,19 @@ export default function Home() {
         </span>
       ))}
 
-      <Navbar locale={locale} onLocaleChange={setLocale} />
+      <Navbar
+        locale={locale}
+        onLocaleChange={setLocale}
+        themeMode={themeMode}
+        onThemeModeChange={setThemeMode}
+      />
 
       <main className="relative mx-auto flex max-w-6xl flex-col gap-16 px-6 pb-16 pt-28 md:px-10">
         <Hero locale={locale} />
         <div className="section-divider" />
         <Services locale={locale} />
         <div className="section-divider" />
-        <Projects locale={locale} />
+        <Projects locale={locale} themeMode={themeMode} />
         <div className="section-divider" />
         <Testimonials locale={locale} />
         <div className="section-divider" />

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 type Locale = "es" | "en";
+type ThemeMode = "dark" | "light";
 
 const projects = [
   {
@@ -65,9 +66,10 @@ const projects = [
 
 interface ProjectsBookProps {
   locale: Locale;
+  themeMode: ThemeMode;
 }
 
-export default function ProjectsBook({ locale }: ProjectsBookProps) {
+export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -87,9 +89,9 @@ export default function ProjectsBook({ locale }: ProjectsBookProps) {
   return (
     <section id="projects" className="scroll-mt-28 space-y-8 md:scroll-mt-32">
       <div className="text-center">
-        <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Portafolio en crecimiento" : "Growing portfolio"}</p>
-        <h3 className="text-3xl font-bold text-slate-100">{locale === "es" ? "Mis Proyectos" : "My Projects"}</h3>
-        <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-300">
+        <p className={`text-sm ${themeMode === "dark" ? "text-[#8ef0df]" : "text-cyan-700"}`}>{locale === "es" ? "Portafolio en crecimiento" : "Growing portfolio"}</p>
+        <h3 className={`text-3xl font-bold ${themeMode === "dark" ? "text-slate-100" : "text-slate-800"}`}>{locale === "es" ? "Mis Proyectos" : "My Projects"}</h3>
+        <p className={`mx-auto mt-3 max-w-2xl text-sm ${themeMode === "dark" ? "text-slate-300" : "text-slate-600"}`}>
           {locale === "es"
             ? "Explora mis proyectos como si pasaras paginas: cada vista muestra contexto visual, tecnologias y objetivo principal."
             : "Explore my projects as if turning pages: each view shows visual context, technologies, and the main goal."}
