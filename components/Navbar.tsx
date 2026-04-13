@@ -189,7 +189,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
                   : "border-cyan-600/20 bg-white/96"
               }`}
             >
-              <div className="grid grid-cols-2 gap-2 text-[11px] sm:text-xs">
+              <div className="flex flex-col gap-1.5 text-[11px] sm:text-xs">
                 {currentItems.map((item) => (
                   <a
                     key={`mobile-${item.label}`}
@@ -198,7 +198,7 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
                       setActive(item.href);
                       setMenuOpen(false);
                     }}
-                    className={`rounded-xl border px-2 py-2 text-center transition-colors duration-300 ${
+                    className={`rounded-xl border px-3 py-2.5 text-left transition-colors duration-300 ${
                       active === item.href
                         ? "border-[#22e2c2] bg-[#22e2c2]/15 text-[#22e2c2]"
                         : themeMode === "dark"
