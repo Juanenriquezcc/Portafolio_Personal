@@ -35,6 +35,24 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
   const [menuOpen, setMenuOpen] = useState(false);
   const currentItems = navItems[locale];
 
+  const goToSection = (href: string) => {
+    const section = document.querySelector(href) as HTMLElement | null;
+    if (!section) {
+      window.history.replaceState(null, "", href);
+      setActive(href);
+      setMenuOpen(false);
+      return;
+    }
+
+    const headerOffset = 92;
+    const targetTop = section.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+    window.history.replaceState(null, "", href);
+    window.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+    setActive(href);
+    setMenuOpen(false);
+  };
+
   useEffect(() => {
     // Evita que el navegador restaure anclas al recargar y fuerza estado inicial en INICIO.
     if (window.location.hash && window.location.hash !== "#home") {
@@ -197,24 +215,24 @@ export default function Navbar({ locale, onLocaleChange, themeMode, onThemeModeC
                       themeMode === "dark" ? "border-[#2ee3c3]/15" : "border-cyan-600/15"
                     } last:border-b-0`}
                   >
-                    <a
-                      href={item.href}
-                      onTouchStart={() => setActive(item.href)}
-                      onClick={() => {
-                        setActive(item.href);
-                        setMenuOpen(false);
+                    <button
+                      type="button"
+                      onTouchEnd={(event) => {
+                        event.preventDefault();
+                        goToSection(item.href);
                       }}
+                      onClick={() => goToSection(item.href)}
                       className={`block py-2.5 transition-all duration-200 active:scale-[0.99] ${
                         active === item.href
                           ? "text-[#22e2c2] drop-shadow-[0_0_10px_rgba(34,226,194,0.35)]"
                           : themeMode === "dark"
                             ? "text-slate-200 hover:text-[#22e2c2] active:text-[#22e2c2]"
                             : "text-slate-700 hover:text-cyan-700 active:text-cyan-700"
-                      }`}
+                      } w-full text-left`}
                       style={{ WebkitTapHighlightColor: "rgba(34, 226, 194, 0.18)" }}
                     >
                       {item.label}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
