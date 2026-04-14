@@ -40,6 +40,16 @@ export default function Hero({ locale }: HeroProps) {
   const [roleVisible, setRoleVisible] = useState(true);
   const roles = roleCopy[locale];
 
+  const handleCvDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/Modern Professional CV Resume.pdf";
+    link.download = "Modern_Professional_CV_Resume.pdf";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
   useEffect(() => {
     const cycleMs = 2400;
     const fadeMs = 220;
@@ -98,8 +108,11 @@ export default function Hero({ locale }: HeroProps) {
           {copy[locale].contact}: <span className="text-sm text-[#4df2d8] md:text-base">+57 315 7614 544</span>
         </a>
         <a
-          href="/cv-juan-jose-enriquez.pdf"
-          download="HOJA_DE_VIDA_JUAN_JOSE_ENRIQUEZ.pdf"
+          href="/Modern Professional CV Resume.pdf"
+          onClick={(event) => {
+            event.preventDefault();
+            handleCvDownload();
+          }}
           className="rounded-full border border-[#2ee3c3]/35 bg-[#17273a] px-4 py-2.5 text-xs font-semibold text-slate-100 transition-colors hover:bg-[#20344b] md:px-5 md:py-3 md:text-sm"
         >
           {copy[locale].cv}

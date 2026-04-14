@@ -8,59 +8,38 @@ type ThemeMode = "dark" | "light";
 
 const projects = [
   {
-    titleEs: "Mi Proyecto Principal",
-    titleEn: "My Main Project",
-    textEs: "Este espacio mostrara el proyecto mas destacado de mi portafolio con mas detalle visual.",
-    textEn: "This space will showcase the most important project in my portfolio with stronger visual detail.",
-    image: "/project-1.svg",
-    stackEs: "Next.js + Tailwind",
-    stackEn: "Next.js + Tailwind",
-    stateEs: "Destacado",
-    stateEn: "Featured",
+    titleEs: "AgroLink",
+    titleEn: "AgroLink",
+    textEs:
+      "Plataforma web enfocada en el sector agro para conectar informacion, procesos y gestion digital con una experiencia clara para el usuario.",
+    textEn:
+      "Web platform focused on the agro sector to connect information, processes, and digital management with a clear user experience.",
+    image:
+      "https://cdn.discordapp.com/attachments/1235371416237510667/1493251628378099762/image.png?ex=69def333&is=69dda1b3&hm=6722de495dac6bf5d7f7807cfc357fab703131d97337215a9c98cbadd3829ae0&",
+    stackEs: "TypeScript + JavaScript + PLpgSQL",
+    stackEn: "TypeScript + JavaScript + PLpgSQL",
+    stateEs: "Produccion",
+    stateEn: "Production",
+    tech: ["TypeScript 73.7%", "JavaScript 17.4%", "PLpgSQL 5.3%", "HTML 3.5%", "CSS 0.1%"],
+    githubUrl: "https://github.com/SamuelMenan/AgroLink",
+    vercelUrl: "https://agro-link-three.vercel.app/",
   },
   {
-    titleEs: "Proyecto en Evolucion",
-    titleEn: "Project in Progress",
-    textEs: "He avanzado paso a paso, mejorando estructura, experiencia de usuario y calidad del codigo.",
-    textEn: "I have advanced step by step, improving structure, user experience, and code quality.",
-    image: "/project-2.svg",
-    stackEs: "React + TypeScript",
-    stackEn: "React + TypeScript",
-    stateEs: "En progreso",
-    stateEn: "In progress",
-  },
-  {
-    titleEs: "Proyecto Experimental",
-    titleEn: "Experimental Project",
-    textEs: "Area para pruebas de nuevas ideas, componentes y animaciones orientadas a resultados.",
-    textEn: "A space for testing new ideas, components, and result-oriented animations.",
-    image: "/project-3.svg",
-    stackEs: "UI Motion",
-    stackEn: "UI Motion",
-    stateEs: "Laboratorio",
-    stateEn: "Lab",
-  },
-  {
-    titleEs: "Proyecto Colaborativo",
-    titleEn: "Collaborative Project",
-    textEs: "Seccion para trabajos en equipo donde aplico comunicacion y metodologias agiles.",
-    textEn: "A section for team work where I apply communication and agile methodologies.",
-    image: "/project-2.svg",
-    stackEs: "Scrum + Git",
-    stackEn: "Scrum + Git",
-    stateEs: "Colaborativo",
-    stateEn: "Collaborative",
-  },
-  {
-    titleEs: "Proyecto Academico",
-    titleEn: "Academic Project",
-    textEs: "Aqui se destacaran desarrollos hechos durante mi carrera y su impacto real.",
-    textEn: "Developments made during my degree and their real impact will be highlighted here.",
-    image: "/project-3.svg",
-    stackEs: "SQL + APIs",
-    stackEn: "SQL + APIs",
-    stateEs: "Academico",
-    stateEn: "Academic",
+    titleEs: "Mentes Creativas",
+    titleEn: "Mentes Creativas",
+    textEs:
+      "Sitio web institucional para el colegio Mentes Creativas con interfaz moderna, contenido claro y enfoque en accesibilidad para estudiantes y acudientes.",
+    textEn:
+      "Institutional website for Mentes Creativas school with a modern interface, clear content, and accessibility-focused experience for students and guardians.",
+    image:
+      "https://media.discordapp.net/attachments/1235371416237510667/1493251791679393862/image.png?ex=69def35a&is=69dda1da&hm=10796af35c82286822a333a208803303e8913a30c702b2a86019c86548732da4&=&format=webp&quality=lossless&width=1668&height=800",
+    stackEs: "TypeScript + JavaScript",
+    stackEn: "TypeScript + JavaScript",
+    stateEs: "Desplegado",
+    stateEn: "Live",
+    tech: ["TypeScript 97.5%", "JavaScript 1.3%", "Other 1.2%"],
+    githubUrl: "https://github.com/SamuelMenan/Colegio-Mentes-Creativas.git",
+    vercelUrl: "https://colegio-mentes-creativas-puce.vercel.app/",
   },
 ];
 
@@ -165,17 +144,16 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
                 <span className="rounded-full border border-[#2ee3c3]/30 px-4 py-2 text-xs font-semibold text-slate-200">
                   {currentStack}
                 </span>
-                <span className="rounded-full border border-[#2ee3c3]/30 px-4 py-2 text-xs font-semibold text-slate-200">
-                  {locale === "es" ? "UI moderna" : "Modern UI"}
-                </span>
-                <span className="rounded-full border border-[#2ee3c3]/30 px-4 py-2 text-xs font-semibold text-slate-200">
-                  {locale === "es" ? "Experiencia web" : "Web experience"}
-                </span>
+                {current.tech.map((techItem) => (
+                  <span key={`${currentTitle}-${techItem}`} className="rounded-full border border-[#2ee3c3]/30 px-4 py-2 text-xs font-semibold text-slate-200">
+                    {techItem}
+                  </span>
+                ))}
               </div>
 
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href="https://github.com/Juanenriquezcc"
+                  href={current.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-full border border-[#2ee3c3]/30 bg-[#16283d] px-4 py-2 text-xs font-semibold text-[#9efaf0] hover:bg-[#1f3550]"
@@ -183,7 +161,7 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
                   {locale === "es" ? "Link GitHub" : "GitHub link"}
                 </a>
                 <a
-                  href="https://vercel.com/juanenriquezccs-projects"
+                  href={current.vercelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-full border border-[#2ee3c3]/30 bg-[#22e2c2] px-4 py-2 text-xs font-semibold text-[#122033] hover:bg-[#5beed8]"
@@ -234,10 +212,15 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
               <span className="rounded-full border border-[#2ee3c3]/30 px-3 py-1 text-[11px] font-semibold text-slate-200">
                 {currentState}
               </span>
+              {current.tech.map((techItem) => (
+                <span key={`mobile-${currentTitle}-${techItem}`} className="rounded-full border border-[#2ee3c3]/30 px-3 py-1 text-[11px] font-semibold text-slate-200">
+                  {techItem}
+                </span>
+              ))}
             </div>
             <div className="flex flex-wrap gap-2 pt-1">
-              <a href="https://github.com/Juanenriquezcc" target="_blank" rel="noopener noreferrer" className="rounded-full border border-[#2ee3c3]/30 px-3 py-1 text-[11px] font-semibold text-[#9efaf0]">{locale === "es" ? "GitHub" : "GitHub"}</a>
-              <a href="https://vercel.com/juanenriquezccs-projects" target="_blank" rel="noopener noreferrer" className="rounded-full border border-[#2ee3c3]/30 px-3 py-1 text-[11px] font-semibold text-[#9efaf0]">{locale === "es" ? "Vercel" : "Vercel"}</a>
+              <a href={current.githubUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[#2ee3c3]/30 px-3 py-1 text-[11px] font-semibold text-[#9efaf0]">{locale === "es" ? "GitHub" : "GitHub"}</a>
+              <a href={current.vercelUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-[#2ee3c3]/30 px-3 py-1 text-[11px] font-semibold text-[#9efaf0]">{locale === "es" ? "Vercel" : "Vercel"}</a>
             </div>
           </div>
         </article>

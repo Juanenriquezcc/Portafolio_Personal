@@ -14,7 +14,7 @@ const copy = {
     github: "Ver perfil y repositorios",
     linkedin: "Ver perfil profesional",
     formTitle: "Enviame un mensaje",
-    formDescription: "Completa tus datos y te abrira tu correo con el mensaje listo para enviar.",
+    formDescription: "Completa tus datos y el mensaje llegara directamente a mi correo.",
     formTitleAccent: "Respuesta rapida",
     nameLabel: "Usuario",
     namePlaceholder: "Tu nombre",
@@ -24,6 +24,10 @@ const copy = {
     messagePlaceholder: "Escribe tu mensaje aqui...",
     send: "Enviar mensaje",
     required: "Todos los campos son obligatorios.",
+    minChars: "Minimo 12 caracteres",
+    chars: "caracteres",
+    onlyLettersInName: "El nombre solo permite letras.",
+    onlyLettersNumbersInMessage: "El mensaje solo permite letras y numeros.",
   },
   en: {
     tag: "Contact",
@@ -33,7 +37,7 @@ const copy = {
     github: "View profile and repositories",
     linkedin: "View professional profile",
     formTitle: "Send me a message",
-    formDescription: "Fill in your details and your email app will open with the message ready to send.",
+    formDescription: "Fill in your details and the message will be sent directly to my email.",
     formTitleAccent: "Quick response",
     nameLabel: "User",
     namePlaceholder: "Your name",
@@ -43,6 +47,10 @@ const copy = {
     messagePlaceholder: "Write your message here...",
     send: "Send message",
     required: "All fields are required.",
+    minChars: "Minimum 12 characters",
+    chars: "characters",
+    onlyLettersInName: "Name only allows letters.",
+    onlyLettersNumbersInMessage: "Message only allows letters and numbers.",
   },
 };
 
@@ -54,27 +62,54 @@ export default function ContactSection({ locale }: ContactSectionProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [showRequired, setShowRequired] = useState(false);
+  const [errorText, setErrorText] = useState("");
+
+  const handleNameChange = (value: string) => {
+    // Only letters and spaces for the user name field.
+    const sanitized = value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, "");
+    setName(sanitized);
+  };
+
+  const handleMessageChange = (value: string) => {
+    // Message accepts only letters, numbers, and spaces/new lines.
+    const sanitized = value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]/g, "");
+    setMessage(sanitized);
+  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     const cleanName = name.trim();
     const cleanEmail = email.trim();
     const cleanMessage = message.trim();
 
     if (!cleanName || !cleanEmail || !cleanMessage) {
-      setShowRequired(true);
+      event.preventDefault();
+      setErrorText(copy[locale].required);
       return;
     }
 
-    setShowRequired(false);
-    const subject = encodeURIComponent(locale === "es" ? `Mensaje de ${cleanName}` : `Message from ${cleanName}`);
-    const body = encodeURIComponent(
-      `${locale === "es" ? "Nombre" : "Name"}: ${cleanName}\n${locale === "es" ? "Correo" : "Email"}: ${cleanEmail}\n\n${cleanMessage}`,
-    );
+    if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(cleanName)) {
+      event.preventDefault();
+      setErrorText(copy[locale].onlyLettersInName);
+      return;
+    }
 
-    window.location.href = `mailto:juanenriquezcc@gmail.com?subject=${subject}&body=${body}`;
+    if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]+$/.test(cleanMessage)) {
+      event.preventDefault();
+      setErrorText(copy[locale].onlyLettersNumbersInMessage);
+      return;
+    }
+
+    if (cleanMessage.length < 12) {
+      event.preventDefault();
+      setErrorText(copy[locale].minChars);
+      return;
+    }
+
+    setErrorText("");
   };
+
+  const messageCount = message.length;
+  const hasMinMessage = message.trim().length >= 12;
 
   return (
     <section id="contacto" className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32">
@@ -136,16 +171,32 @@ export default function ContactSection({ locale }: ContactSectionProps) {
           <p className="mx-auto mt-2 max-w-2xl text-xs leading-6 text-slate-300 md:mx-0 md:text-sm md:leading-7">{copy[locale].formDescription}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="relative z-10 mt-5 grid grid-cols-1 gap-3.5 md:mt-6 md:grid-cols-2 md:gap-4.5">
+        <form
+          action="https://formsubmit.co/juan.enriquezc@campusucc.edu.co"
+          method="POST"
+          onSubmit={handleSubmit}
+          className="relative z-10 mt-5 grid grid-cols-1 gap-3.5 md:mt-6 md:grid-cols-2 md:gap-4.5"
+        >
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input
+            type="hidden"
+            name="_subject"
+            value={locale === "es" ? "Nuevo mensaje desde el portafolio" : "New message from portfolio"}
+          />
+          <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
+
           <label className="space-y-1.5">
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].nameLabel}</span>
             <div className="contact-input-shell group flex items-center gap-2 rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
               <User size={15} className="text-[#8ef0df] transition-colors duration-300 group-focus-within:text-[#22e2c2]" />
               <input
                 type="text"
+                name="name"
                 value={name}
-                onChange={(event) => setName(event.target.value)}
+                onChange={(event) => handleNameChange(event.target.value)}
                 placeholder={copy[locale].namePlaceholder}
+                required
                 className="w-full bg-transparent text-sm text-slate-100 outline-none placeholder:text-slate-400"
               />
             </div>
@@ -157,26 +208,37 @@ export default function ContactSection({ locale }: ContactSectionProps) {
               <Mail size={15} className="text-[#8ef0df] transition-colors duration-300 group-focus-within:text-[#22e2c2]" />
               <input
                 type="email"
+                name="email"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
                 placeholder={copy[locale].emailPlaceholder}
+                required
                 className="w-full bg-transparent text-sm text-slate-100 outline-none placeholder:text-slate-400"
               />
             </div>
           </label>
 
           <label className="space-y-1.5 md:col-span-2">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].messageLabel}</span>
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].messageLabel}</span>
+              <span className={`text-[11px] font-semibold ${hasMinMessage ? "text-[#8ef0df]" : "text-amber-300"}`}>
+                {messageCount} {copy[locale].chars} • {copy[locale].minChars}
+              </span>
+            </div>
             <div className="contact-input-shell group rounded-xl border border-[#2ee3c3]/25 bg-[#16263a]/70 px-3 py-2.5 transition-all duration-300 focus-within:border-[#22e2c2] focus-within:shadow-[0_0_0_2px_rgba(34,226,194,0.16)]">
               <div className="mb-1.5 flex items-center gap-2">
                 <MessageSquare size={15} className="text-[#8ef0df] transition-colors duration-300 group-focus-within:text-[#22e2c2]" />
                 <span className="text-[11px] text-slate-300">{locale === "es" ? "Tu mensaje" : "Your message"}</span>
               </div>
               <textarea
+                name="message"
                 value={message}
-                onChange={(event) => setMessage(event.target.value)}
+                onChange={(event) => handleMessageChange(event.target.value)}
                 placeholder={copy[locale].messagePlaceholder}
                 rows={5}
+                required
                 className="w-full resize-y bg-transparent text-sm text-slate-100 outline-none placeholder:text-slate-400"
               />
             </div>
@@ -190,7 +252,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
               <Send size={15} />
               {copy[locale].send}
             </button>
-            {showRequired && <p className="mt-2 text-center text-xs text-rose-300">{copy[locale].required}</p>}
+            {errorText && <p className="mt-2 text-center text-xs text-rose-300">{errorText}</p>}
           </div>
         </form>
       </article>
