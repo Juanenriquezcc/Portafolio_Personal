@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { Github, Linkedin, Mail, MessageSquare, Send, Sparkles, User } from "lucide-react";
 
 type Locale = "es" | "en";
@@ -65,6 +65,14 @@ export default function ContactSection({ locale }: ContactSectionProps) {
   const [errorText, setErrorText] = useState("");
   const [successText, setSuccessText] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const successTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearSuccessTimer = () => {
+    if (successTimerRef.current) {
+      clearTimeout(successTimerRef.current);
+      successTimerRef.current = null;
+    }
+  };
 
   const handleNameChange = (value: string) => {
     // Only letters and spaces for the user name field.
@@ -111,6 +119,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
 
     setErrorText("");
     setSuccessText("");
+    clearSuccessTimer();
     setIsSending(true);
 
     try {
@@ -131,6 +140,11 @@ export default function ContactSection({ locale }: ContactSectionProps) {
       setEmail("");
       setMessage("");
       setSuccessText(locale === "es" ? "Mensaje enviado con exito." : "Message sent successfully.");
+      clearSuccessTimer();
+      successTimerRef.current = setTimeout(() => {
+        setSuccessText("");
+        successTimerRef.current = null;
+      }, 4000);
     } catch {
       setErrorText(locale === "es" ? "No se pudo enviar el mensaje. Intenta de nuevo." : "The message could not be sent. Try again.");
     } finally {
