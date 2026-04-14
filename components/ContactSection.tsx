@@ -63,6 +63,8 @@ export default function ContactSection({ locale }: ContactSectionProps) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [errorText, setErrorText] = useState("");
+  const [successText, setSuccessText] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const handleNameChange = (value: string) => {
     // Only letters and spaces for the user name field.
@@ -76,36 +78,64 @@ export default function ContactSection({ locale }: ContactSectionProps) {
     setMessage(sanitized);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     const cleanName = name.trim();
     const cleanEmail = email.trim();
     const cleanMessage = message.trim();
 
     if (!cleanName || !cleanEmail || !cleanMessage) {
-      event.preventDefault();
       setErrorText(copy[locale].required);
+      setSuccessText("");
       return;
     }
 
     if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(cleanName)) {
-      event.preventDefault();
       setErrorText(copy[locale].onlyLettersInName);
+      setSuccessText("");
       return;
     }
 
     if (!/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]+$/.test(cleanMessage)) {
-      event.preventDefault();
       setErrorText(copy[locale].onlyLettersNumbersInMessage);
+      setSuccessText("");
       return;
     }
 
     if (cleanMessage.length < 12) {
-      event.preventDefault();
       setErrorText(copy[locale].minChars);
+      setSuccessText("");
       return;
     }
 
     setErrorText("");
+    setSuccessText("");
+    setIsSending(true);
+
+    try {
+      const formData = new FormData(event.currentTarget);
+      const response = await fetch("https://formsubmit.co/ajax/juan.enriquezc@campusucc.edu.co", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      setName("");
+      setEmail("");
+      setMessage("");
+      setSuccessText(locale === "es" ? "Mensaje enviado con exito." : "Message sent successfully.");
+    } catch {
+      setErrorText(locale === "es" ? "No se pudo enviar el mensaje. Intenta de nuevo." : "The message could not be sent. Try again.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const messageCount = message.length;
@@ -171,12 +201,7 @@ export default function ContactSection({ locale }: ContactSectionProps) {
           <p className="mx-auto mt-2 max-w-2xl text-xs leading-6 text-slate-300 md:mx-0 md:text-sm md:leading-7">{copy[locale].formDescription}</p>
         </div>
 
-        <form
-          action="https://formsubmit.co/juan.enriquezc@campusucc.edu.co"
-          method="POST"
-          onSubmit={handleSubmit}
-          className="relative z-10 mt-5 grid grid-cols-1 gap-3.5 md:mt-6 md:grid-cols-2 md:gap-4.5"
-        >
+        <form onSubmit={handleSubmit} className="relative z-10 mt-5 grid grid-cols-1 gap-3.5 md:mt-6 md:grid-cols-2 md:gap-4.5">
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
           <input
@@ -247,12 +272,14 @@ export default function ContactSection({ locale }: ContactSectionProps) {
           <div className="md:col-span-2">
             <button
               type="submit"
-              className="contact-send-button flex w-full items-center justify-center gap-2 rounded-xl border border-[#2ee3c3]/35 bg-linear-to-r from-[#17304a] via-[#1b3754] to-[#1f3f60] px-4 py-2.5 text-sm font-semibold text-[#9efaf0] transition-transform duration-300 hover:-translate-y-0.5"
+              disabled={isSending}
+              className="contact-send-button flex w-full items-center justify-center gap-2 rounded-xl border border-[#2ee3c3]/35 bg-linear-to-r from-[#17304a] via-[#1b3754] to-[#1f3f60] px-4 py-2.5 text-sm font-semibold text-[#9efaf0] transition-transform duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
             >
               <Send size={15} />
-              {copy[locale].send}
+              {isSending ? (locale === "es" ? "Enviando..." : "Sending...") : copy[locale].send}
             </button>
             {errorText && <p className="mt-2 text-center text-xs text-rose-300">{errorText}</p>}
+            {successText && <p className="mt-2 text-center text-xs text-[#8ef0df]">{successText}</p>}
           </div>
         </form>
       </article>
