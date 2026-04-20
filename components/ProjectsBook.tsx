@@ -11,14 +11,14 @@ const projects = [
     titleEs: "AgroLink",
     titleEn: "AgroLink",
     textEs:
-      "Plataforma web enfocada en el sector agro para conectar informacion, procesos y gestion digital con una experiencia clara para el usuario.",
+      "Plataforma web enfocada en el sector agro para conectar información, procesos y gestión digital con una experiencia clara para el usuario.",
     textEn:
       "Web platform focused on the agro sector to connect information, processes, and digital management with a clear user experience.",
     image:
       "https://cdn.discordapp.com/attachments/1235371416237510667/1493251628378099762/image.png?ex=69def333&is=69dda1b3&hm=6722de495dac6bf5d7f7807cfc357fab703131d97337215a9c98cbadd3829ae0&",
     stackEs: "TypeScript + JavaScript + PLpgSQL",
     stackEn: "TypeScript + JavaScript + PLpgSQL",
-    stateEs: "Produccion",
+    stateEs: "Producción",
     stateEn: "Production",
     tech: ["TypeScript 73.7%", "JavaScript 17.4%", "PLpgSQL 5.3%", "HTML 3.5%", "CSS 0.1%"],
     githubUrl: "https://github.com/SamuelMenan/AgroLink",
@@ -98,7 +98,7 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
   return (
     <section
       id="projects"
-      className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32 lg:space-y-8"
+      className="fade-in-soft scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32 lg:space-y-8"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -107,7 +107,7 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
         <h3 className={`text-2xl font-bold md:text-[1.75rem] lg:text-3xl ${themeMode === "dark" ? "text-slate-100" : "text-slate-800"}`}>{locale === "es" ? "Mis Proyectos" : "My Projects"}</h3>
         <p className={`mx-auto mt-2 max-w-2xl text-xs md:mt-3 md:text-sm ${themeMode === "dark" ? "text-slate-300" : "text-slate-600"}`}>
           {locale === "es"
-            ? "Explora mis proyectos como si pasaras paginas: cada vista muestra contexto visual, tecnologias y objetivo principal."
+            ? "Explora mis proyectos como si pasaras páginas: cada vista muestra contexto visual, tecnologías y objetivo principal."
             : "Explore my projects as if turning pages: each view shows visual context, technologies, and the main goal."}
         </p>
       </div>
@@ -116,7 +116,7 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
         <div className="book-shell mx-auto max-w-5xl">
           <div className="book-spine" />
 
-          <div key={currentTitle} className="grid grid-cols-2 gap-0">
+          <div key={currentTitle} className="book-page-turn grid grid-cols-2 gap-0">
             <article className="book-page-left rounded-l-2xl border-r border-[#2ee3c3]/20 p-6">
               <div className="overflow-hidden rounded-xl border border-[#2ee3c3]/25">
                 <Image
@@ -127,11 +127,10 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
                   className="aspect-16/10 h-full w-full object-cover"
                 />
               </div>
-              <div className="mt-4 flex items-center justify-between text-xs">
+              <div className="mt-4 flex items-center justify-start gap-2 text-xs">
                 <span className="rounded-full bg-[#22e2c2]/15 px-3 py-1 font-semibold text-[#8ef0df]">
                   {currentState}
                 </span>
-                <span className="text-slate-400">{locale === "es" ? `Pagina ${active + 1} / ${projects.length}` : `Page ${active + 1} / ${projects.length}`}</span>
               </div>
             </article>
 
@@ -156,7 +155,7 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
                   href={current.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-[#2ee3c3]/30 bg-[#16283d] px-4 py-2 text-xs font-semibold text-[#9efaf0] hover:bg-[#1f3550]"
+                  className="rounded-full border border-[#2ee3c3]/30 bg-[#16283d] px-4 py-2 text-xs font-semibold text-[#9efaf0] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1f3550]"
                 >
                   {locale === "es" ? "Link GitHub" : "GitHub link"}
                 </a>
@@ -164,7 +163,7 @@ export default function ProjectsBook({ locale, themeMode }: ProjectsBookProps) {
                   href={current.vercelUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-[#2ee3c3]/30 bg-[#22e2c2] px-4 py-2 text-xs font-semibold text-[#122033] hover:bg-[#5beed8]"
+                  className="rounded-full border border-[#2ee3c3]/30 bg-[#22e2c2] px-4 py-2 text-xs font-semibold text-[#122033] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#5beed8]"
                 >
                   {locale === "es" ? "Link Vercel" : "Vercel link"}
                 </a>

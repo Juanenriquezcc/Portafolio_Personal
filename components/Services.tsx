@@ -1,72 +1,80 @@
 "use client";
 
 import { useState } from "react";
+import type { IconType } from "react-icons";
+import { SiCss, SiGit, SiJavascript, SiOpenjdk, SiPostgresql, SiPython, SiReact, SiTypescript } from "react-icons/si";
 
 type Locale = "es" | "en";
 
-const services = [
+const services: Array<{
+  title: string;
+  textEs: string;
+  textEn: string;
+  icon: IconType;
+}> = [
   {
     title: "JavaScript",
-    textEs: "Lo uso para crear interfaces interactivas, validaciones y logica del lado del cliente.",
+    textEs: "Lo uso para crear interfaces interactivas, validaciones y lógica del lado del cliente.",
     textEn: "I use it to build interactive interfaces, validations, and client-side logic.",
-    icon: "JS",
+    icon: SiJavascript,
   },
   {
     title: "TypeScript",
-    textEs: "Me permite escribir codigo mas seguro y mantenible con tipado estatico en proyectos reales.",
+    textEs: "Me permite escribir código más seguro y mantenible con tipado estático en proyectos reales.",
     textEn: "It lets me write safer, more maintainable code with static typing in real projects.",
-    icon: "TS",
+    icon: SiTypescript,
   },
   {
     title: "React + Next.js",
-    textEs: "Desarrollo vistas dinamicas y apps modernas con rutas, componentes reutilizables y SEO.",
+    textEs: "Desarrollo vistas dinámicas y apps modernas con rutas, componentes reutilizables y SEO.",
     textEn: "I develop dynamic views and modern apps with routing, reusable components, and SEO.",
-    icon: "RN",
+    icon: SiReact,
   },
   {
     title: "SQL",
-    textEs: "Diseno consultas para organizar datos, reportes y flujos de informacion en bases de datos.",
+    textEs: "Diseño consultas para organizar datos, reportes y flujos de información en bases de datos.",
     textEn: "I design queries to organize data, reports, and information flows in databases.",
-    icon: "DB",
+    icon: SiPostgresql,
   },
   {
     title: "Python",
-    textEs: "Lo utilizo para scripts, automatizacion de tareas y logica de apoyo en proyectos academicos.",
+    textEs: "Lo utilizo para scripts, automatización de tareas y lógica de apoyo en proyectos académicos.",
     textEn: "I use it for scripts, task automation, and support logic in academic projects.",
-    icon: "PY",
+    icon: SiPython,
   },
   {
     title: "Java",
-    textEs: "Base solida para programacion orientada a objetos y construccion de logica estructurada.",
+    textEs: "Base sólida para programación orientada a objetos y construcción de lógica estructurada.",
     textEn: "A solid base for object-oriented programming and structured business logic.",
-    icon: "JV",
+    icon: SiOpenjdk,
   },
   {
     title: "HTML + CSS",
-    textEs: "Diseno interfaces limpias, responsivas y alineadas con una experiencia de usuario clara.",
+    textEs: "Diseño interfaces limpias, responsivas y alineadas con una experiencia de usuario clara.",
     textEn: "I design clean, responsive interfaces aligned with clear user experience.",
-    icon: "UI",
+    icon: SiCss,
   },
   {
     title: "Git + GitHub",
-    textEs: "Gestiono versiones, ramas y colaboracion para mantener orden y trazabilidad del desarrollo.",
+    textEs: "Gestiono versiones, ramas y colaboración para mantener orden y trazabilidad del desarrollo.",
     textEn: "I handle versions, branches, and collaboration to keep development organized and traceable.",
-    icon: "GH",
+    icon: SiGit,
   },
 ];
 
 const skills = {
   es: [
-    "Resolucion de problemas",
-    "Comunicacion efectiva",
+    "Resolución de problemas",
+    "Comunicación efectiva",
     "Trabajo en equipo",
     "Arquitectura Frontend",
-    "Diseno Responsive",
-    "Integracion de APIs",
+    "Diseño Responsive",
+    "Integración de APIs",
     "Control de versiones",
-    "Pensamiento analitico",
-    "Adaptacion rapida",
+    "Pensamiento analítico",
+    "Adaptación rápida",
     "Aprendizaje continuo",
+    "Implementación de IA",
   ],
   en: [
     "Problem solving",
@@ -79,6 +87,7 @@ const skills = {
     "Analytical thinking",
     "Fast adaptation",
     "Continuous learning",
+    "AI implementation",
   ],
 };
 
@@ -89,9 +98,9 @@ interface ServicesProps {
 const mobileCopy = {
   es: {
     stackTitle: "Stack principal",
-    stackNote: "Tecnologias que uso con mas frecuencia",
+    stackNote: "Tecnologías que uso con más frecuencia",
     skillsCompact: "Habilidades clave",
-    more: "+{count} mas",
+    more: "+{count} más",
     less: "Ver menos",
   },
   en: {
@@ -109,10 +118,10 @@ export default function Services({ locale }: ServicesProps) {
   const extraSkillsCount = Math.max(0, skills[locale].length - featuredSkills.length);
 
   return (
-    <section id="services" className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32 lg:space-y-8">
+    <section id="services" className="fade-in-soft scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32 lg:space-y-8">
       <div className="text-center">
-        <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Perfil tecnico" : "Technical profile"}</p>
-        <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{locale === "es" ? "Mi Stack Tecnologico en Lenguajes" : "My Technology Stack in Languages"}</h3>
+        <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Perfil técnico" : "Technical profile"}</p>
+        <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{locale === "es" ? "Mi Stack Tecnológico en Lenguajes" : "My Technology Stack in Languages"}</h3>
       </div>
 
       <article className="frosted-panel rounded-2xl p-4 lg:hidden">
@@ -128,10 +137,10 @@ export default function Services({ locale }: ServicesProps) {
           {services.map((service) => (
             <article
               key={`mobile-${service.title}`}
-              className="min-w-[132px] snap-start rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/75 p-3 transition-transform duration-300 active:scale-[0.98]"
+              className="min-w-33 snap-start rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/75 p-3 transition-transform duration-300 active:scale-[0.98]"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#22e2c2]/15 text-[10px] font-semibold text-[#8ef0df]">
-                {service.icon}
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#22e2c2]/15 text-[#8ef0df]">
+                  <service.icon size={18} />
               </span>
               <p className="mt-2 text-xs font-semibold text-slate-100">{service.title}</p>
             </article>
@@ -143,10 +152,10 @@ export default function Services({ locale }: ServicesProps) {
         {services.map((service) => (
           <article
             key={service.title}
-            className="frosted-panel flex flex-col items-center gap-3 rounded-2xl p-4 text-center transition-transform duration-500 hover:-translate-y-1.5 md:gap-4 md:p-5 lg:gap-5 lg:p-6"
+            className="group frosted-panel flex flex-col items-center gap-3 rounded-2xl p-4 text-center transition-all duration-500 hover:-translate-y-1.5 hover:border-[#44f0d6]/40 md:gap-4 md:p-5 lg:gap-5 lg:p-6"
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#22e2c2]/15 text-xs font-semibold text-[#8ef0df] md:h-11 md:w-11 md:text-sm lg:h-12 lg:w-12">
-              {service.icon}
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#22e2c2]/15 text-[#8ef0df] transition-transform duration-300 group-hover:scale-105 md:h-11 md:w-11 lg:h-12 lg:w-12">
+              <service.icon size={22} />
             </span>
             <h4 className="text-lg font-semibold text-slate-100 md:text-xl">{service.title}</h4>
             <p className="text-xs leading-6 text-slate-300 md:text-sm md:leading-7">{locale === "es" ? service.textEs : service.textEn}</p>
@@ -194,7 +203,7 @@ export default function Services({ locale }: ServicesProps) {
         )}
       </article>
 
-      <article className="hidden rounded-2xl p-4 md:block md:p-6 lg:p-7 frosted-panel">
+      <article className="hidden rounded-2xl p-4 transition-all duration-300 hover:-translate-y-0.5 md:block md:p-6 lg:p-7 frosted-panel">
         <div className="text-center">
           <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Valor profesional" : "Professional value"}</p>
           <h4 className="mt-1 text-xl font-bold text-slate-100 md:text-2xl">{locale === "es" ? "Mis Habilidades" : "My Skills"}</h4>
@@ -204,7 +213,7 @@ export default function Services({ locale }: ServicesProps) {
           {skills[locale].map((skill) => (
             <span
               key={skill}
-              className="rounded-full border border-[#2ee3c3]/30 bg-[#17273a]/70 px-3 py-1.5 text-[11px] font-semibold text-[#b8fff4] shadow-[0_0_12px_rgba(34,226,194,0.12)] md:px-4 md:py-2 md:text-xs"
+              className="rounded-full border border-[#2ee3c3]/30 bg-[#17273a]/70 px-3 py-1.5 text-[11px] font-semibold text-[#b8fff4] shadow-[0_0_12px_rgba(34,226,194,0.12)] transition-transform duration-300 hover:-translate-y-0.5 md:px-4 md:py-2 md:text-xs"
             >
               {skill}
             </span>

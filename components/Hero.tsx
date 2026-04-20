@@ -13,9 +13,9 @@ const roleCopy = {
 const copy = {
   es: {
     intro: "Hola, Soy",
-    badge: "Construyendo experiencias digitales con detalle y dedicacion.",
+    badge: "Construyendo experiencias digitales con detalle y dedicación.",
     paragraph:
-      "Estudiante de Ingenieria de Software en la Universidad Cooperativa de Colombia. Me especializo en crear soluciones web funcionales, escalables y visualmente profesionales, integrando buenas practicas de desarrollo, experiencia de usuario y despliegue continuo.",
+      "Estudiante de Ingeniería de Software en la Universidad Cooperativa de Colombia. Me especializo en crear soluciones web funcionales, escalables y visualmente profesionales, integrando buenas prácticas de desarrollo, experiencia de usuario y despliegue continuo.",
     contact: "Contacto",
     cv: "Ver CV / Perfil",
     links: "Links principales",
@@ -75,15 +75,15 @@ export default function Hero({ locale }: HeroProps) {
   return (
     <section
       id="home"
-      className="scroll-mt-24 grid grid-cols-1 justify-items-center gap-5 px-1 py-4 text-center md:scroll-mt-28 md:gap-6 md:py-6 lg:scroll-mt-32 lg:gap-7 lg:py-8"
+      className="fade-in-soft scroll-mt-24 grid grid-cols-1 justify-items-center gap-5 px-1 py-4 text-center md:scroll-mt-28 md:gap-6 md:py-6 lg:scroll-mt-32 lg:gap-7 lg:py-8"
     >
       <p className="text-base text-slate-300 md:text-lg">
-        {copy[locale].intro}, <span className="text-[#4df2d8]">{locale === "es" ? "Soy" : "I am"}</span>
+        {copy[locale].intro}
       </p>
 
       <div className="space-y-2">
         <h1 className="bg-linear-to-r from-white via-[#9efaf0] to-[#22e2c2] bg-clip-text text-3xl font-extrabold leading-tight text-transparent drop-shadow-[0_0_18px_rgba(34,226,194,0.35)] md:text-4xl lg:text-5xl">
-          Juan Jose Enriquez Cordoba
+          Juan José Enríquez Córdoba
         </h1>
         <h2
           className={`h-7 text-lg font-semibold text-[#b7fbf1] transition-all duration-200 md:h-8 md:text-xl lg:text-2xl ${
@@ -92,7 +92,7 @@ export default function Hero({ locale }: HeroProps) {
         >
           {roles[roleIndex]}
         </h2>
-        <div className="mx-auto flex max-w-fit items-center justify-center rounded-full border border-[#2ee3c3]/25 bg-[#17273a]/70 px-3 py-1.5 text-[10px] font-semibold tracking-[0.1em] text-[#8ef0df] shadow-[0_0_22px_rgba(34,226,194,0.12)] md:px-4 md:py-2 md:text-xs">
+        <div className="mx-auto flex max-w-fit items-center justify-center rounded-full border border-[#2ee3c3]/25 bg-[#17273a]/70 px-3 py-1.5 text-[10px] font-semibold tracking-widest text-[#8ef0df] shadow-[0_0_22px_rgba(34,226,194,0.12)] md:px-4 md:py-2 md:text-xs">
           {copy[locale].badge}
         </div>
         <p className="mx-auto mt-3 max-w-3xl text-sm leading-6 text-slate-200 md:mt-4 md:leading-7 md:text-base">

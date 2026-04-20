@@ -7,27 +7,27 @@ type Locale = "es" | "en";
 
 const copy = {
   es: {
-    tag: "Contactos",
+    tag: "Contacto",
     title: "Conectemos",
-    phone: "Telefono",
-    location: "Ubicacion",
+    phone: "Teléfono",
+    location: "Ubicación",
     github: "Ver perfil y repositorios",
     linkedin: "Ver perfil profesional",
-    formTitle: "Enviame un mensaje",
-    formDescription: "Completa tus datos y el mensaje llegara directamente a mi correo.",
-    formTitleAccent: "Respuesta rapida",
+    formTitle: "Envíame un mensaje",
+    formDescription: "Completa tus datos y el mensaje llegará directamente a mi correo.",
+    formTitleAccent: "Respuesta rápida",
     nameLabel: "Usuario",
     namePlaceholder: "Tu nombre",
     emailLabel: "Correo",
     emailPlaceholder: "tucorreo@ejemplo.com",
     messageLabel: "Mensaje",
-    messagePlaceholder: "Escribe tu mensaje aqui...",
+    messagePlaceholder: "Escribe tu mensaje aquí...",
     send: "Enviar mensaje",
     required: "Todos los campos son obligatorios.",
-    minChars: "Minimo 12 caracteres",
+    minChars: "Mínimo 12 caracteres",
     chars: "caracteres",
     onlyLettersInName: "El nombre solo permite letras.",
-    onlyLettersNumbersInMessage: "El mensaje solo permite letras y numeros.",
+    onlyLettersNumbersInMessage: "El mensaje solo permite letras y números.",
   },
   en: {
     tag: "Contact",
@@ -139,14 +139,14 @@ export default function ContactSection({ locale }: ContactSectionProps) {
       setName("");
       setEmail("");
       setMessage("");
-      setSuccessText(locale === "es" ? "Mensaje enviado con exito." : "Message sent successfully.");
+      setSuccessText(locale === "es" ? "Mensaje enviado con éxito." : "Message sent successfully.");
       clearSuccessTimer();
       successTimerRef.current = setTimeout(() => {
         setSuccessText("");
         successTimerRef.current = null;
       }, 4000);
     } catch {
-      setErrorText(locale === "es" ? "No se pudo enviar el mensaje. Intenta de nuevo." : "The message could not be sent. Try again.");
+      setErrorText(locale === "es" ? "No se pudo enviar el mensaje. Inténtalo de nuevo." : "The message could not be sent. Try again.");
     } finally {
       setIsSending(false);
     }
@@ -156,21 +156,21 @@ export default function ContactSection({ locale }: ContactSectionProps) {
   const hasMinMessage = message.trim().length >= 12;
 
   return (
-    <section id="contacto" className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32">
+    <section id="contacto" className="fade-in-soft scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32">
       <div className="text-center">
         <p className="text-sm text-[#8ef0df]">{copy[locale].tag}</p>
         <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{copy[locale].title}</h3>
       </div>
 
       <div className="frosted-panel grid grid-cols-1 gap-4 rounded-2xl p-4 md:grid-cols-2 md:gap-5 md:rounded-3xl md:p-6 lg:grid-cols-4 lg:p-7">
-        <article className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-4 md:rounded-2xl md:p-5">
+        <article className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-4 transition-all duration-300 hover:-translate-y-0.5 md:rounded-2xl md:p-5">
           <p className="text-xs uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].phone}</p>
           <a href="tel:+573157614544" className="mt-2 block text-base font-semibold text-slate-100 hover:text-[#22e2c2] md:text-lg">
             +57 315 7614 544
           </a>
         </article>
 
-        <article className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-4 md:rounded-2xl md:p-5">
+        <article className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-4 transition-all duration-300 hover:-translate-y-0.5 md:rounded-2xl md:p-5">
           <p className="text-xs uppercase tracking-[0.12em] text-[#8ef0df]">{copy[locale].location}</p>
           <p className="mt-2 text-base font-semibold text-slate-100 md:text-lg">Colombia, Pasto, Nariño</p>
         </article>

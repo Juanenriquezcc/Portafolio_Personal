@@ -3,16 +3,16 @@ type Locale = "es" | "en";
 const academic = {
   es: [
     {
-      title: "Ingenieria de Software",
+      title: "Ingeniería de Software",
       place: "Universidad Cooperativa de Colombia",
-      period: "2024 - Actualidad",
-      detail: "Formacion en arquitectura de software, bases de datos, desarrollo web y trabajo colaborativo.",
+      period: "2024 - Actual",
+      detail: "Formación en arquitectura de software, bases de datos, desarrollo web y trabajo colaborativo.",
     },
     {
       title: "Proyectos Universitarios",
       place: "Semestre 1 - 5",
-      period: "Evolucion continua",
-      detail: "Aplicacion de metodologias agiles, control de versiones y desarrollo de prototipos funcionales.",
+      period: "Evolución continua",
+      detail: "Aplicación de metodologías ágiles, control de versiones y desarrollo de prototipos funcionales.",
     },
   ],
   en: [
@@ -34,16 +34,16 @@ const academic = {
 const work = {
   es: [
     {
-      title: "Proyectos Freelance Academicos",
+      title: "Proyectos Freelance Académicos",
       place: "Remoto",
-      period: "2025 - Actualidad",
-      detail: "Creacion de interfaces y prototipos para clientes y companeros, priorizando experiencia de usuario.",
+      period: "2025 - Actual",
+      detail: "Creación de interfaces y prototipos para clientes y compañeros, priorizando la experiencia de usuario.",
     },
     {
-      title: "Practica de Desarrollo",
-      place: "En preparacion",
-      period: "Proximo objetivo",
-      detail: "Enfocado en aplicar conocimientos tecnicos en entornos empresariales y equipos multidisciplinarios.",
+      title: "Práctica de Desarrollo",
+      place: "En preparación",
+      period: "Próximo objetivo",
+      detail: "Enfocado en aplicar conocimientos técnicos en entornos empresariales y equipos multidisciplinarios.",
     },
   ],
   en: [
@@ -94,14 +94,14 @@ interface ExperienceProps {
 
 export default function Experience({ locale }: ExperienceProps) {
   return (
-    <section id="experiencia" className="scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32">
+    <section id="experiencia" className="fade-in-soft scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32">
       <div className="text-center">
         <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Trayectoria" : "Background"}</p>
-        <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{locale === "es" ? "Experiencia Academica y Laboral" : "Academic and Professional Experience"}</h3>
+        <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{locale === "es" ? "Experiencia Académica y Laboral" : "Academic and Professional Experience"}</h3>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <TimelineBlock title={locale === "es" ? "Experiencia Academica" : "Academic Experience"} items={academic[locale]} />
+        <TimelineBlock title={locale === "es" ? "Experiencia Académica" : "Academic Experience"} items={academic[locale]} />
         <TimelineBlock title={locale === "es" ? "Experiencia Laboral" : "Professional Experience"} items={work[locale]} />
       </div>
     </section>

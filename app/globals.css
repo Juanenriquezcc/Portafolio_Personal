@@ -190,6 +190,19 @@ html {
   }
 }
 
+@keyframes fadeInSoft {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 .role-fade {
   animation: roleFade 4.2s ease-in-out infinite;
 }
@@ -292,6 +305,10 @@ html {
 .contact-card-orb-bottom {
   background: radial-gradient(circle, rgba(66, 153, 225, 0.2) 0%, rgba(66, 153, 225, 0.04) 65%, transparent 100%);
   animation-delay: 0.7s;
+}
+
+.fade-in-soft {
+  animation: fadeInSoft 720ms ease-out both;
 }
 
 .contact-send-button {
