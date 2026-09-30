@@ -114,7 +114,7 @@ export default function Hero({ locale }: { locale: Locale }) {
           <h1
             data-reveal
             style={revealDelay(80)}
-            className="font-display text-[2.9rem] font-extrabold uppercase leading-[0.92] tracking-[-0.035em] text-fg sm:text-7xl lg:text-[5.6rem]"
+            className="font-display text-[2.9rem] font-extrabold uppercase leading-[1.1] tracking-[-0.035em] text-fg sm:text-7xl sm:leading-[1.12] lg:text-[5.6rem] lg:leading-[1.08]"
           >
             Juan José
             <br />
