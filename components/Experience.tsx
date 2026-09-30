@@ -1,108 +1,133 @@
-type Locale = "es" | "en";
+import { BriefcaseBusiness, GraduationCap, type LucideIcon } from "lucide-react";
+import SectionHeader from "./SectionHeader";
+import { academic, work, type TimelineEntry } from "@/data/experience";
+import type { Locale } from "@/data/site";
+import { revealDelay } from "@/lib/reveal";
 
-const academic = {
-  es: [
-    {
-      title: "Ingeniería de Software",
-      place: "Universidad Cooperativa de Colombia",
-      period: "2024 - Actual",
-      detail: "Formación en arquitectura de software, bases de datos, desarrollo web y trabajo colaborativo.",
-    },
-    {
-      title: "Proyectos Universitarios",
-      place: "Semestre 1 - 5",
-      period: "Evolución continua",
-      detail: "Aplicación de metodologías ágiles, control de versiones y desarrollo de prototipos funcionales.",
-    },
-  ],
-  en: [
-    {
-      title: "Software Engineering",
-      place: "Universidad Cooperativa de Colombia",
-      period: "2024 - Present",
-      detail: "Training in software architecture, databases, web development, and collaborative work.",
-    },
-    {
-      title: "University Projects",
-      place: "Semesters 1 - 5",
-      period: "Continuous growth",
-      detail: "Application of agile methods, version control, and functional prototype development.",
-    },
-  ],
+const copy = {
+  es: {
+    eyebrow: "Trayectoria",
+    title: "Experiencia académica y profesional",
+    academic: "Experiencia Académica",
+    work: "Experiencia Laboral",
+    entries: (n: number) => `${String(n).padStart(2, "0")} ${n === 1 ? "registro" : "registros"}`,
+  },
+  en: {
+    eyebrow: "Background",
+    title: "Academic and professional experience",
+    academic: "Academic Experience",
+    work: "Professional Experience",
+    entries: (n: number) => `${String(n).padStart(2, "0")} ${n === 1 ? "entry" : "entries"}`,
+  },
 };
 
-const work = {
-  es: [
-    {
-      title: "Proyectos Freelance Académicos",
-      place: "Remoto",
-      period: "2025 - Actual",
-      detail: "Creación de interfaces y prototipos para clientes y compañeros, priorizando la experiencia de usuario.",
-    },
-    {
-      title: "Práctica de Desarrollo",
-      place: "En preparación",
-      period: "Próximo objetivo",
-      detail: "Enfocado en aplicar conocimientos técnicos en entornos empresariales y equipos multidisciplinarios.",
-    },
-  ],
-  en: [
-    {
-      title: "Academic Freelance Projects",
-      place: "Remote",
-      period: "2025 - Present",
-      detail: "Creation of interfaces and prototypes for clients and peers, prioritizing user experience.",
-    },
-    {
-      title: "Development Practice",
-      place: "In preparation",
-      period: "Next goal",
-      detail: "Focused on applying technical knowledge in business environments and multidisciplinary teams.",
-    },
-  ],
-};
+function Entry({ entry, index, locale }: { entry: TimelineEntry; index: number; locale: Locale }) {
+  const first = index === 0;
+  const chips = [entry.area, entry.duration, entry.location].filter(Boolean) as TimelineEntry["period"][];
 
-function TimelineBlock({
-  title,
-  items,
-}: {
-  title: string;
-  items: Array<{ title: string; place: string; period: string; detail: string }>;
-}) {
   return (
-    <article className="frosted-panel rounded-2xl p-4 md:p-5 lg:p-6">
-      <h4 className="text-lg font-semibold text-slate-100 md:text-xl">{title}</h4>
-      <div className="mt-3 space-y-3 md:mt-4 md:space-y-4">
-        {items.map((item) => (
-          <div key={`${item.title}-${item.place}`} className="rounded-xl border border-[#2ee3c3]/20 bg-[#16263a]/70 p-3 md:p-4">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="text-sm font-semibold text-[#b8fff4] md:text-base">{item.title}</p>
-              <span className="text-xs text-slate-400">{item.period}</span>
-            </div>
-            <p className="text-xs text-slate-300 md:text-sm">{item.place}</p>
-            <p className="mt-2 text-xs leading-6 text-slate-300 md:text-sm md:leading-7">{item.detail}</p>
-          </div>
-        ))}
+    <li
+      data-reveal
+      style={revealDelay(index * 90)}
+      className="group relative flex flex-col gap-4 rounded-2xl border border-line bg-raised/85 p-5 shadow-card transition-[border-color,box-shadow,translate] duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-lift md:p-6"
+    >
+      <span
+        aria-hidden="true"
+        className={`absolute -left-7 top-7 h-2.75 w-2.75 rounded-full border-2 border-canvas transition-[background-color,box-shadow] duration-300 group-hover:bg-accent-strong group-hover:shadow-[0_0_0_4px_color-mix(in_srgb,var(--c-accent-strong)_20%,transparent)] ${
+          first ? "bg-accent-strong" : "bg-line-strong"
+        }`}
+      />
+
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <div className="flex items-baseline gap-3 font-mono text-xs">
+          <span className="text-muted transition-colors group-hover:text-accent">{String(index + 1).padStart(2, "0")}</span>
+          <span className={`font-semibold uppercase tracking-[0.08em] ${first ? "text-accent" : "text-fg-2"}`}>{entry.period[locale]}</span>
+        </div>
+        {entry.status && (
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-elevated px-2.5 py-0.5 text-[11px] font-medium text-fg-2">
+            <span className={`h-1.5 w-1.5 rounded-full ${entry.status.es === "En curso" ? "bg-teal" : "bg-muted"}`} />
+            {entry.status[locale]}
+          </span>
+        )}
       </div>
-    </article>
+
+      <div className="flex flex-col gap-1">
+        <h4 className="font-display text-lg font-bold leading-snug tracking-tight text-fg md:text-xl">{entry.title[locale]}</h4>
+        <p className="text-sm font-medium text-accent">
+          {entry.organization}
+          {entry.organizationNote && <span className="font-normal text-muted"> · {entry.organizationNote[locale]}</span>}
+        </p>
+      </div>
+
+      {chips.length > 0 && (
+        <ul className="flex flex-wrap gap-1.5">
+          {chips.map((chip) => (
+            <li key={chip.es} className="rounded-md border border-line bg-elevated px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
+              {chip[locale]}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {entry.description && <p className="leading-relaxed text-fg-2">{entry.description[locale]}</p>}
+
+      {entry.highlights && (
+        <ul className="flex flex-col gap-2 border-t border-line pt-4">
+          {entry.highlights.map((item) => (
+            <li key={item.es} className="flex gap-3 text-sm leading-relaxed text-fg-2">
+              <span aria-hidden="true" className="mt-[0.6rem] h-px w-3 shrink-0 bg-teal" />
+              {item[locale]}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {entry.tags && (
+        <ul className="flex flex-wrap gap-1.5">
+          {entry.tags.map((tag) => (
+            <li key={tag.es} className="rounded-full border border-accent-strong/25 bg-accent-strong/5 px-2.5 py-1 text-xs font-medium text-accent">
+              {tag[locale]}
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
   );
 }
 
-interface ExperienceProps {
-  locale: Locale;
+function TimelineBlock({ title, icon: Icon, entries, locale }: { title: string; icon: LucideIcon; entries: TimelineEntry[]; locale: Locale }) {
+  return (
+    <div data-reveal className="flex min-w-0 flex-col gap-8">
+      <div className="flex items-center justify-between gap-3 border-b border-line pb-4">
+        <div className="flex items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-line bg-raised text-accent shadow-card">
+            <Icon size={18} />
+          </span>
+          <h3 className="font-display text-xl font-semibold tracking-tight text-fg">{title}</h3>
+        </div>
+        <span className="hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.14em] text-muted lg:inline">{copy[locale].entries(entries.length)}</span>
+      </div>
+      <ol className="relative flex flex-col gap-5 pl-7">
+        <span aria-hidden="true" className="absolute bottom-7 left-1.25 top-7 w-px bg-linear-to-b from-accent-strong/60 via-line-strong to-line" />
+        {entries.map((entry, i) => (
+          <Entry key={`${entry.organization}-${entry.period.es}`} entry={entry} index={i} locale={locale} />
+        ))}
+      </ol>
+    </div>
+  );
 }
 
-export default function Experience({ locale }: ExperienceProps) {
-  return (
-    <section id="experiencia" className="fade-in-soft scroll-mt-24 space-y-6 md:scroll-mt-28 md:space-y-7 lg:scroll-mt-32">
-      <div className="text-center">
-        <p className="text-sm text-[#8ef0df]">{locale === "es" ? "Trayectoria" : "Background"}</p>
-        <h3 className="text-2xl font-bold text-slate-100 md:text-[1.75rem] lg:text-3xl">{locale === "es" ? "Experiencia Académica y Laboral" : "Academic and Professional Experience"}</h3>
-      </div>
+export default function Experience({ locale }: { locale: Locale }) {
+  const t = copy[locale];
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <TimelineBlock title={locale === "es" ? "Experiencia Académica" : "Academic Experience"} items={academic[locale]} />
-        <TimelineBlock title={locale === "es" ? "Experiencia Laboral" : "Professional Experience"} items={work[locale]} />
+  return (
+    <section id="experience" className="scroll-mt-20 px-4 py-20 sm:px-6 lg:px-12 lg:py-28">
+      <div className="mx-auto flex max-w-7xl flex-col gap-14">
+        <SectionHeader id="experience" eyebrow={t.eyebrow} title={t.title} />
+        <div className="grid grid-cols-1 items-start gap-16 md:grid-cols-2 md:gap-8 lg:gap-12">
+          <TimelineBlock title={t.academic} icon={GraduationCap} entries={academic} locale={locale} />
+          <TimelineBlock title={t.work} icon={BriefcaseBusiness} entries={work} locale={locale} />
+        </div>
       </div>
     </section>
   );
